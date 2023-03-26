@@ -1,0 +1,488 @@
+---
+title: Swell Marketplace
+excerpt: Build a marketplace using swell
+coverImage: /images/notes/swell-marketplace/cover.png
+ogImage: /images/notes/swell-marketplace/cover.jpeg
+tags:
+  - NextJS
+  - Swell
+  - Headless Commerce
+author:
+  name: Hamed Bahram
+  picture: /images/authors/hamed.png
+date: '2022-10-10'
+---
+
+Swell is an API-first headless ecommerce platform with built-in
+subscription capabilities and marketplace features.
+
+<BackgroundReading href="/notes/swell" title="Background reading:">
+  What is Swell
+</BackgroundReading>
+
+You can extend Swell's base data models to build a marketplace. A
+marketplace's functionality revolves around different user groups, mainly
+two groups:
+
+- buyers
+- vendors
+
+## Add customer groups
+
+To define different user groups in your marketplace, you can use **customer
+groups** within the Swell dashboard.
+
+1. Navigate to **Settings > Customers**.
+2. Select **Add customer group** under the groups section.
+3. Provide a group **name** and **save**.
+
+For a marketplace, you'll need at least two customer groups: buyers and
+vendors.
+
+## Adding new accounts
+
+With the customer groups created, you can now add new accounts by posting
+to the `/accounts` endpoint and associating them to either the buyers or
+vendors group.
+
+We can either use the `swell.js` JavaScript SDK to interface with Swell's
+[Frontend API](https://developers.swell.is/frontend-api/introduction) which
+implements a subset of operations available in the Backend API, or use the
+`swell-node` package which is an API-wrapper for the
+[Backend API](https://developers.swell.is/backend-api/introduction) on the
+server-side.
+
+We are using the `swell-node` interface for these examples:
+
+```js
+const swell = require('swell-node')
+swell.init('my-store', 'secret-key')
+
+try {
+  await swell.post('/accounts', {
+    email: 'vendor@mail.com',
+    first_name: 'Vendor',
+    last_name: 'Swell',
+    password: 'password123', // will be encrypted using `bcrypt`
+    group: 'vendors' // or buyers
+  })
+} catch (error) {
+  console.log(error)
+}
+```
+
+## Extend Swell models
+
+Leverage Swell's flexible system to expand upon the base functionalities by
+building off of the `Products` and `Orders` models.
+
+### Associate products to vendors
+
+You can edit the `Products` model to include `vendor_id` as a field to
+establish a connection between a product and a vendor.
+
+You can accomplish this through the API or the editor in the Swell
+dashboard.
+
+```js
+await swell.put('/:models/products/fields', {
+  vendor_id: {
+    type: 'objectid',
+    required: true // optional
+  }
+})
+```
+
+From the dashboard:
+
+- Go to **Developers > Models**
+- Select the `Products` model
+- Click **Add field**; then choose `Lookup` as the field type
+- Under **Label** type `Vendor`
+- Select `Customers` for **Lookup collection**
+- Select `Details` in the **Admin field location** for displaying the field
+  in the admin dashboard
+- Click **Save**
+
+This will create a `vendor_id` field in each product to store a reference
+to the vendor account.
+
+#### Creating new products
+
+With the addition of the `vendor_id`, you can now create new products and
+link them to a vendor.
+
+```js
+await swell.post('/products', {
+  name: 'Swell T-Shirt',
+  price: 120,
+  type: 'standard',
+  active: true,
+  vendor_id: '609590e5d0ef5f42c5e1ce01' // vendor account id
+})
+```
+
+#### Fetch products associated to a vendor
+
+You can fetch all of a vendor's products by referencing its id:
+
+```js
+await swell.get('/products', {
+	where: { vendor_id: '609590e5d0ef5f42c5e1ce01'},
+	limit 25 // optional, can be up to 1000
+});
+```
+
+### Associate orders to vendors
+
+It is also necessary to associate orders to vendors. However, instead of
+adding the relation to the order itself, you can add the relation within an
+order's `items` array.
+
+Update the `Orders` model to include the `vendor_id` of each item added to
+the `items` array since an order might include items from multiple vendors.
+The `vendor_id` is retrievable from products using the `formula`:
+
+```js
+await swell.put('/:models/orders/fields/items/fields', {
+  vendor_id: {
+    type: 'objectid',
+    formula: 'product.vendor_id'
+  }
+})
+```
+
+#### Fetch orders associated with a vendor
+
+The following query will fetch orders containing products related to a
+particular vendor:
+
+```js
+await swell.get('/orders', {
+  where: {
+    items: { $elemMatch: { vendor_id: '609590e5d0ef5f42c5e1ce01' } }
+  }
+})
+```
+
+You'll then need to filter the `items` array to only show the item that
+belongs to the specific vendor, as the query will return the entire order.
+
+#### Shipments and order fulfillment
+
+Vendors can fulfill order items by adding shipments to orders. To create a
+shipment and fulfill items, simply post to the `/shipments` endpoint.
+
+```js
+await swell.post('/shipments', {
+  order_id: '60a3cd3ac2c46f30b6cb3b5d',
+  items: [
+    {
+      order_item_id: '60a3cd3ac2c46f30b6cb3b2a', // item id in the items array in the order
+      product_id: '60a3cc9f23ead02dff477b89',
+      quantity: 1
+    }
+  ],
+  tracking_code: '787374451654' // optional
+})
+```
+
+Swell allows you to assign multiple shipments to one order so that each
+vendor can fulfill their items separately with individual tracking numbers.
+
+## Vendor onboarding
+
+Now that we have laid the foundations, we'll be looking at onboarding
+vendors, platform fees, and vendor payouts. We'll be using
+[Stripe Connect](https://stripe.com/en-ca/connect) and serverless functions
+for this.
+
+In order to set up payouts, you will need to have a Stripe account and make
+sure you have the proper configurations:
+
+1. Create a **Stripe account**
+2. Provide your **business details**
+3. Complete your **platform profile**
+
+### Configuring serverless functions
+
+We would need to create 3 functions in order to:
+
+- Create a vendor express account
+- Get the onboarding URL for the vendor to complete registration
+- Create vendor payouts on every order
+
+We'll be using NextJS API routes (deployed as serverless functions) in the
+examples below, but you can use any other provider/platform.
+
+#### Create vendor stripe account
+
+The first step is to create an Stripe **express** account for your vendor
+and redirect them to complete the onboarding flow:
+
+```js
+import Stripe from 'stripe'
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+
+export default async function (req, res) {
+  if (req.method === 'POST') {
+    try {
+      const account = await stripe.accounts.create({
+        type: 'express'
+      })
+
+      const data = await account
+      return res.status(201).json({ data })
+    } catch (e) {
+      return res.status(e.statusCode || 500).json({ message: e.message })
+    }
+  }
+
+  res.setHeader('Allow', 'POST')
+  res.status(405).end('Method Not Allowed')
+}
+```
+
+Once the account is created, you can retrieve the `id` from the returned
+object.
+
+#### Get the Onboarding URL
+
+This creates an onboarding URL that your vendors need to complete in order
+to enter their verification and bank info. You need to pass the account
+`id` retrieved in the last step to this function:
+
+```js
+import Stripe from 'stripe'
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+
+export default async function (req, res) {
+  if (req.method === 'POST') {
+    try {
+      const { accountId } = body
+
+      const accountLinks = await stripe.accountLinks.create({
+        account: accountId,
+        refresh_url: 'https://example.com/reauth',
+        return_url: 'https://example.com/return',
+        type: 'account_onboarding'
+      })
+
+      const data = await accountLinks
+      return res.status(201).json({ data })
+    } catch (e) {
+      return res.status(e.statusCode || 500).json({ message: e.message })
+    }
+  }
+
+  res.setHeader('Allow', 'POST')
+  res.status(405).end('Method Not Allowed')
+}
+```
+
+You can retrieve the onboarding `url` from the response and redirect the
+vendor to complete their account registration.
+
+##### Onboarding completion
+
+A vendor will have to complete their onboarding for their account to be
+fully functional.
+
+###### return_url
+
+Stripe issues a redirect to this URL when the user completes the Connect
+Onboarding flow. This doesn't mean that all information has been collected
+or that there are no outstanding requirements on the account. This only
+means the flow was entered and exited properly.
+
+After a user is redirected to your `return_url`, check the
+`details_submitted` parameter on their account by doing either of the
+following:
+
+- Listen to `account.updated` events with a
+  [Connect webhook](https://stripe.com/docs/connect/webhooks).
+- [Retrieve](https://stripe.com/docs/api/accounts/retrieve) the account
+  with the API.
+
+You can check for the `charges_enabled` property to make sure the account
+is fully onboarded.
+
+###### refresh_url
+
+Your user is redirected to the `refresh_url` if:
+
+- The link is expired.
+- The user already visited the URL.
+- Your platform can no longer access the account.
+- The account has been rejected.
+
+Your `refresh_url` should trigger the previous step with the same
+parameters to generate a new URL, and redirect the user to the onboarding
+flow to create a seamless experience.
+
+##### Updating the `Account` model in Swell
+
+Let's update the `Account` model in Swell to include the Stripe Connect id
+for each vendor, to manage order payouts and transfers later on:
+
+```js
+await swell.put('/:models/accounts/fields', {
+  stripe_connect_id: {
+    type: 'string',
+    label: 'Stripe Connect ID'
+  }
+})
+```
+
+Assuming that a vendor has completed their onboarding, you can update the
+vendor's account in Swell:
+
+```js
+await swell.put('/accounts/{id}', {
+  stripe_connect_id: 'acct_XXXXXXX' // obtained in previous steps
+})
+```
+
+##### Creating a platform fee
+
+Now that we have vendors associated to the Stripe account, we need to
+establish the transaction logic in Swell to charge platform fees to
+vendors:
+
+Let's first add a `platform_fee` field to each item in the `items` array in
+order:
+
+```js
+await swell.put('/:models/orders/fields/items/fields', {
+  platform_fee: {
+    type: 'float',
+    default: 0.2
+  }
+})
+```
+
+We can now calculate the `item_platform_fee` for each item by referencing
+the `platform_fee` to capture a portion of each the item's total price in
+the formula:
+
+```js
+await swell.put('/:models/orders/fields/items/fields', {
+  item_platform_fee: {
+    type: 'float',
+    formula: 'platform_fee * price_total'
+  }
+})
+```
+
+This example calculates 20% of each item's total price as the platform fee.
+This will deduct the fee from vendor payouts and allocate it as the
+platform's revenue.
+
+### Create vendor payouts
+
+With vendors successfully onboarded, the last step will be setting up the
+payout logic to ensure vendors can receive payment for their goods
+purchased on the marketplace.
+
+We need to create another function (endpoint) which is triggered by a
+webhook that we will configure on Swell to fire after every order.
+
+This function will loop through the items in the order, find the associated
+vendor for the item and issue Stripe transfers to the vendors Stripe
+account.
+
+```js
+const stripe = require('stripe')('STRIPE_SECRET_KEY')
+
+const swell = require('swell-node')
+swell.init('SWELL_STORE_ID', 'SWELL_SECRET_KEY')
+
+export default async function (req, res) {
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST')
+    res.status(405).end('Method Not Allowed')
+    return
+  }
+
+  const filteredItems = body.data.items.filter(item => item.vendor_id)
+
+  let transfers = []
+
+  if (filteredItems.length === 0) {
+    res.status(200).json({ transfers })
+    return
+  }
+
+  for (const item of filteredItems) {
+    // find vendor account
+    const account = await swell.get('/accounts', {
+      where: { id: item.vendor_id }
+    })
+
+    const stripeId = account?.results[0]?.stripe_connect_id
+    if (!stripeId) continue
+
+    // payout amounts must be in cents.
+    const truncAmt = (item.price_total - item.item_platform_fee).toFixed(2)
+    const payoutAmt = Number(
+      truncAmt.split('.')[0] + truncAmt.split('.')[1]
+    )
+
+    const transfer = await stripe.transfers.create({
+      amount: payoutAmt,
+      currency: 'usd', // change to your Stripe currency
+      destination: stripeId
+    })
+
+    const data = await transfer
+    transfers = [...transfers, data]
+  }
+
+  return res.status(200).json({ transfers })
+}
+```
+
+### Create a Swell webhook
+
+To create webhooks in Swell, in your store dashboard:
+
+1. Navigate to **Developers > Webhooks**
+2. Under webhooks, select **Add new webhook**
+3. Under events, select `order.created`, this wil trigger our payout
+   endpoint function after every order.
+4. Click **Save**
+
+#### Top up Stripe Account
+
+In order to test our live integration, you'll need to load funds in your
+Stripe account to make transfers to another Stripe Connect account. You can
+do this in two separate ways:
+
+1. By the Stripe dashboard by selecting: Balances > Add to balance. This
+   functionality is only available to US Stripe accounts.
+2. By creating a manual charge using a specific card number, You can do
+   this by selecting:
+
+   - **Payments > Create payment**
+   - Enter any amount under **Amount**
+   - Enter `4000 0000 0000 0077` as the **card number**
+   - Enter any future date as the **expiration date**
+   - And any 3 digit number for **CVC**
+
+Now that we have funds to transfer with our payout functionality, we can
+test our payout functions. Create a test order from the Swell Dashboard to
+verify everything is working.
+
+## Summary
+
+That's it folks. We have a fully functioning marketplace that can onboard
+vendors, charge platform fees and transfer funds.
+
+## Resources
+
+Here are some of the resources that inspired this note:
+
+#### Documentation
+
+- [Swell documentation](https://developers.swell.is/)
+- [Swell guides](https://developers.swell.is/guides/core-concepts/platform-overview)

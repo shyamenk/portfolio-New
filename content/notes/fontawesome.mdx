@@ -1,0 +1,228 @@
+---
+title: Fontawesome
+excerpt: Using Fontawesome icons in NextJS
+coverImage: /images/notes/fontawesome/cover.png
+ogImage: /images/notes/fontawesome/cover.jpeg
+tags:
+  - NextJS
+  - Fontawesome
+  - SVG Icons
+author:
+  name: Hamed Bahram
+  picture: /images/authors/hamed.png
+date: '2022-09-18'
+---
+
+In this short note, we'll learn how to use
+[Fontawesome](https://fontawesome.com/) icons in NextJS using the official
+`react-fontawesome` component to make everything work just right.
+
+There are two methods to render icons in NextJS/React:
+
+- SVG + JS method
+- Web fonts + CSS method
+
+In this note, we'll cover the basics of using the official Fontawesome
+react component, which uses the `SVG + JS` method to render icons. But you
+can use the other method if you prefer.
+
+## Setup
+
+1. ### Add the core package
+
+   First, install the core package which includes all the utilities we
+   need.
+
+   ```bash
+   npm i @fortawesome/fontawesome-svg-core
+   npm i @fortawesome/react-fontawesome
+   ```
+
+2. ### Add the icon packages
+
+   Next, install the icons you want to use. You can choose from Free of Pro
+   icons.
+
+   - #### Free
+
+     For free icons you can add either one of these packages:
+
+     ```bash
+     # free icons
+     npm i @fortawesome/free-solid-svg-icons
+     npm i @fortawesome/free-regular-svg-icons
+     ```
+
+   - #### Pro
+
+     For Pro icons, you'll need to have an active subscription to a Pro
+     plan and a valid Token (You can find it in your account).
+
+     ##### Configure access
+
+     you'll need to configure the `@fortawesome` scope via the npm
+     registry. You can set this up globally or per-project.
+
+     - ###### Set up npm Token for all projects
+
+       This global setup will allow any of your projects to use the Font
+       Awesome package and your token:
+
+       ```bash
+        npm config set "@fortawesome:registry" https://npm.fontawesome.com/
+        npm config set "//npm.fontawesome.com/:_authToken" YOUR_TOKEN
+       ```
+
+     - ###### Set up npm Token for a specific project
+
+       This allows you to configure each project individually. Create a
+       `.npmrc` file in the root of your project and paste in the following
+       snippet:
+
+       ```bash title=".npmrc"
+        @fortawesome:registry=https://npm.fontawesome.com/
+        //npm.fontawesome.com/:_authToken=YOUR_TOKEN
+       ```
+
+     Once you've configured the access via the npm registry, you can add
+     the icon packages that you plan to use in your app:
+
+     ```bash
+       # pro icons
+       npm i @fortawesome/pro-solid-svg-icons
+       npm i @fortawesome/pro-regular-svg-icons
+       npm i @fortawesome/pro-light-svg-icons
+       npm i @fortawesome/pro-thin-svg-icons
+       npm i @fortawesome/pro-duotone-svg-icons
+       npm i @fortawesome/sharp-solid-svg-icons
+     ```
+
+3. ### Add the React component
+
+   Now that we have installed the required packages let's add icons to our
+   project using the `FontAwesomeIcon` element.
+
+   There are a few ways to add icons when using React. The easiest way is
+   to use dynamic import which only imports the icons you're using.
+
+   #### Dynamic import
+
+   Dynamic import eliminates the need to declare icons individually. This
+   works thanks to the
+   [babel macros plugin](https://github.com/kentcdodds/babel-plugin-macros).
+
+   - ##### Install babel macros
+
+     First, install the babel macros plugin:
+
+     ```bash
+       npm i babel-plugin-macros
+     ```
+
+   - ##### Configure babel config
+
+     Next, configure babel to use `macros` plugin. Add the following to
+     your `.babelrc` file:
+
+     ```json
+     {
+       "presets": ["next/babel"],
+       "plugins": ["macros"]
+     }
+     ```
+
+     Then, create a `babel-plugin-macros.config.js` and add the
+     `fontawesome-svg-core` settings. You can set the license to either
+     'free' or 'pro' depending on the icons you are planning to use.
+
+     ```js
+     module.exports = {
+       'fontawesome-svg-core': {
+         license: 'free'
+       }
+     }
+     ```
+
+   - ##### Add icons to your project
+
+     Now using the following syntax, you can add any icon to your project.
+
+     ```jsx
+      import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+      import {
+        solid,
+        regular,
+        brands,
+        icon
+      } from '@fortawesome/fontawesome-svg-core/import.macro'
+
+      <FontAwesomeIcon icon={brands('twitter')} />
+      <FontAwesomeIcon icon={regular('coffee')} />
+      <FontAwesomeIcon icon={solid('user-secret')} />
+      <FontAwesomeIcon icon={icon({name: 'coffee', style: 'solid'})} />
+     ```
+
+     In this example, we imported macros for `solid` or `regular` icons to
+     render the 'coffee' and 'user-secret' icons in those styles.
+
+     It also showed how to use the more general `icon` macro, which can be
+     used to import an icon of any family and style, including the Sharp
+     family (Pro only). It defaults to the Classic family.
+
+   #### Alternative way to add icons
+
+   If you don't want to use the dynamic import using babel macros plugin,
+   you can add individual icons to each component:
+
+   ```jsx
+   import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+   import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+
+   const element = <FontAwesomeIcon icon={faEnvelope} />
+   ```
+
+4. ### Add some styling
+
+   - #### Using Fontawesome styling toolkit
+
+     The `FontAwesomeIcon` has built-in props for sizing, transforming, and
+     even animating your icons:
+
+     ```jsx
+       /* Size */
+       <FontAwesomeIcon icon={faCoffee} size="xs" />
+       <FontAwesomeIcon icon={faCoffee} size="lg" />
+
+       /* Rotate */
+       <FontAwesomeIcon icon={faCoffee} rotation={90} />
+
+       /* Animate */
+       <FontAwesomeIcon icon={faBasketBall} bounce />
+       <FontAwesomeIcon icon={faBasketBall} fade />
+     ```
+
+     You can explore the Fontawesome
+     [styling toolkit](https://fontawesome.com/docs/web/style/styling) to
+     see all available options for styling your icons.
+
+   - #### Using CSS classes
+
+     You can add styling to any component using the className property.
+
+     ```jsx
+     <FontAwesomeIcon icon={faSpinner} className="highlight" />
+     ```
+
+## Summary
+
+That's it folks. You can now add any icon from the amazing fontawesome
+library to your NextJS project and style it to match the vibe of your app.
+
+## Resources
+
+Here are some of the resources that inspired this note:
+
+#### Documentation
+
+- [Fontawesome](https://fontawesome.com/)
+- [Customizing babel config](https://nextjs.org/docs/advanced-features/customizing-babel-config)
