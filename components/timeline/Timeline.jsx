@@ -5,10 +5,10 @@ const Timeline = () => {
     // <section className="text-gray-800 bg-white dark:bg-react dark:text-gray-100">
     // <section className="container py-4 ">
     <div className="grid gap-4 mb-8 sm:grid-cols-12">
-      <div className="col-span-12 sm:col-span-3">
-        <div className="text-left sm:text-left mb-14 before:block before:w-32 before:h-1 before:mb-5 before:rounded-md before:mx-auto sm:before:mx-0 before:bg-blue-600">
-          <h3 className="text-3xl font-semibold">Work Experience</h3>
-        </div>
+      <div className="col-span-12 pt-1 sm:col-span-3">
+        {/* <div className="text-left sm:text-left mb-14 before:block before:w-32 before:h-1 before:mb-5 before:rounded-md before:mx-auto sm:before:mx-0 before:bg-blue-600"> */}
+        <h3 className="text-3xl font-semibold">Work Experience</h3>
+        {/* </div> */}
       </div>
       <div className="relative col-span-12 space-y-6 sm:col-span-9">
         <div className="col-span-12 space-y-12 relative  sm:col-span-8 sm:space-y-8 sm:before:absolute sm:before:top-2 sm:before:bottom-0 sm:before:w-0.5 sm:before:-left-3 before:bg-gray-300">

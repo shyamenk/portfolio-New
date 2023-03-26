@@ -40,6 +40,14 @@ const SiteHeader = () => {
               Snippets
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              href="/contact"
+              className="transition hover:text-react-link"
+            >
+              Contact
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </header>
