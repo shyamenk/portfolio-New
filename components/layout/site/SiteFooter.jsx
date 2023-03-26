@@ -2,8 +2,8 @@ import Link from 'next/link'
 
 const SiteFooter = () => {
   return (
-    <footer className="mx-auto w-full max-w-2xl px-6">
-      <ul className="flex w-full justify-center gap-10 border-t border-react-link border-opacity-50 py-10">
+    <footer className="w-full max-w-2xl px-6 mx-auto">
+      <ul className="flex justify-center w-full gap-10 py-10 border-t border-opacity-50 border-react-link">
         <li>
           <Link href="https://twitter.com/haamedbahram">
             <a
@@ -11,6 +11,7 @@ const SiteFooter = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
+              software engineer intern asp.net
               <svg
                 aria-hidden="true"
                 focusable="false"

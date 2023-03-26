@@ -3,6 +3,7 @@ import Intro from '@/components/home/Intro'
 import RecentNotes from '@/components/notes/RecentNotes'
 import RecentProjects from '@/components/projects/RecentProjects'
 import Skills from '@/components/Skills/Skills'
+import Timeline from '@/components/timeline/Timeline'
 import Subscribe from '@/components/utils/Subscribe'
 // import RecentVideos from '@/components/videos/RecentVideos'
 import { getAllNotesMeta } from '@/lib/notes'
@@ -14,11 +15,10 @@ const Home = ({ notes, projects }) => {
   return (
     <>
       <Intro />
+      <Timeline />
       <Skills />
-      <RecentNotes notes={notes} />
-      {/* <RecentVideos videos={videos} /> */}
-      {/* <RecentCourses courses={courses} /> */}
       <RecentProjects projects={projects} />
+      <RecentNotes notes={notes} />
       <Subscribe />
     </>
   )
