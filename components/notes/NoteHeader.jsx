@@ -16,7 +16,7 @@ const NoteHeader = ({ meta }) => {
       </h1>
       <div className="flex items-center gap-2 text-sm font-light text-zinc-400">
         <Avatar name={author.name} src={author.picture} />
-        <div className="flex grow flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col grow sm:flex-row sm:items-center sm:justify-between">
           <div>
             <span>{author.name}</span> /{' '}
             <DateFormatter dateString={date} />
@@ -36,8 +36,6 @@ const NoteHeader = ({ meta }) => {
               <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
             </svg>
             <span>{readTime}</span>
-            <span className="px-1">{` • `}</span>
-            {asPath && <ViewCounter asPath={asPath} />}
           </div>
         </div>
       </div>

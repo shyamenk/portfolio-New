@@ -5,7 +5,7 @@ const RecentProjects = ({ projects }) => {
   return (
     <section className="mb-16">
       <h2 className="mb-6 text-2xl font-bold">Recent Projects</h2>
-      <ul className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <ul className="grid grid-cols-1 gap-4 mb-6 sm:grid-cols-2">
         {projects.map(project => (
           <ProjectSummary key={project.slug} project={project} />
         ))}

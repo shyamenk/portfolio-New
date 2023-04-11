@@ -4,12 +4,8 @@ import RecentNotes from '@/components/notes/RecentNotes'
 import RecentProjects from '@/components/projects/RecentProjects'
 import Skills from '@/components/Skills/Skills'
 import Timeline from '@/components/timeline/Timeline'
-import Subscribe from '@/components/utils/Subscribe'
-// import RecentVideos from '@/components/videos/RecentVideos'
 import { getAllNotesMeta } from '@/lib/notes'
 import { getAllProjectsMeta } from '@/lib/projects'
-// import { getPopularVideos } from '@/lib/youtube'
-// import Stripe from 'stripe'
 
 const Home = ({ notes, projects }) => {
   return (
@@ -19,7 +15,6 @@ const Home = ({ notes, projects }) => {
       <Skills />
       <RecentProjects projects={projects} />
       <RecentNotes notes={notes} />
-      <Subscribe />
     </>
   )
 }

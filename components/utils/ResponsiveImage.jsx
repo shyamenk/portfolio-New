@@ -6,7 +6,7 @@ const ResponsiveImage = props => {
   const src = props.src + (resolvedTheme === 'dark' ? '-dark.png' : '.png')
 
   return (
-    <span className="my-12 block">
+    <span className="block my-12">
       <Image
         src={src}
         alt={props.alt}

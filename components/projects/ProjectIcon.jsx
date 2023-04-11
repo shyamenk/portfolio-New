@@ -19,7 +19,7 @@ const ProjectIcon = ({ icon, className }) => {
         </div>
       )}
       {icon === 'sweeter' && (
-        <div className="-ml-2 flex justify-center">
+        <div className="flex justify-center -ml-2">
           <Image
             src={sweeter}
             alt="Sweeter Logo"
@@ -33,7 +33,7 @@ const ProjectIcon = ({ icon, className }) => {
           aria-hidden="true"
           focusable="false"
           data-icon="react"
-          className="mx-auto h-10"
+          className="h-10 mx-auto"
           role="img"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 512 512"
@@ -49,7 +49,7 @@ const ProjectIcon = ({ icon, className }) => {
           aria-hidden="true"
           focusable="false"
           data-icon="javascript"
-          className="mx-auto h-10"
+          className="h-10 mx-auto"
           role="img"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 448 512"
@@ -65,7 +65,7 @@ const ProjectIcon = ({ icon, className }) => {
           aria-hidden="true"
           focusable="false"
           data-icon="nodejs"
-          className="mx-auto h-10"
+          className="h-10 mx-auto"
           role="img"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 640 512"
@@ -78,7 +78,7 @@ const ProjectIcon = ({ icon, className }) => {
       )}
       {icon === 'nextjs' && (
         <svg
-          className="mx-auto h-8"
+          className="h-8 mx-auto"
           viewBox="0 0 148 90"
           version="1.1"
           xmlns="http://www.w3.org/1999/xlink"
@@ -92,7 +92,7 @@ const ProjectIcon = ({ icon, className }) => {
       )}
       {icon === 'mongodb' && (
         <svg
-          className="mx-auto h-6"
+          className="h-6 mx-auto"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1112.61 300"
         >
@@ -147,7 +147,7 @@ const ProjectIcon = ({ icon, className }) => {
           aria-hidden="true"
           focusable="false"
           data-icon="server"
-          className="mx-auto h-10"
+          className="h-10 mx-auto"
           role="img"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 512 512"

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 
 const NavLink = ({ href, className, children, ...props }) => {
   const router = useRouter()
+
   const isMatch = href === router?.asPath?.split('?')[0]
 
   const classes = isMatch
