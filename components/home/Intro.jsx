@@ -1,25 +1,20 @@
 import Image from 'next/image'
 import profilePic from '@/public/images/authors/shyam.png'
 import SocialLinks from './SocialLinks'
-import { motion, AnimatePresence, Frame } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 const Intro = () => {
   return (
     <section className="flex flex-col-reverse items-start gap-8 mb-16 md:flex-row">
-      <Image
+      {/* <Image
         className="flex-1 rounded-full"
         src={profilePic}
         alt="Picture of the author"
         width={115}
         height={115}
-      />
+      /> */}
       <div className="flex-1">
-        <h1
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="mb-6 text-3xl font-bold"
-        >
+        <h1 className="mb-6 text-3xl font-bold">
           Hey, I&#39;m Shyam{' '}
           <span className="font-mono text-xl font-bold text-blue-500 text-opacity-90">
             Web Developer

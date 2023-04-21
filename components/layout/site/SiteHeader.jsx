@@ -8,7 +8,7 @@ const SiteHeader = () => {
 
   return (
     <header className="sticky top-0 z-10 py-6 mb-16 bg-white bg-opacity-95 dark:bg-react dark:bg-opacity-95">
-      <nav className="flex flex-row-reverse items-center justify-between w-full max-w-3xl px-6 mx-auto">
+      <nav className="flex flex-row-reverse items-center justify-between w-full max-w-4xl px-6 mx-auto">
         {mounted && <ThemeButton />}
         <ul className="flex items-center gap-6 font-medium justify-evenly">
           <li>

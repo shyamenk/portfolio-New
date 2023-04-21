@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        roboto: ['"Roboto Mono"', 'monospace']
+        roboto: ['Roboto Mono', 'monospace']
       },
       colors: {
         react: {

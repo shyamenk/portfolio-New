@@ -2,13 +2,9 @@ import React from 'react'
 
 const Timeline = () => {
   return (
-    // <section className="text-gray-800 bg-white dark:bg-react dark:text-gray-100">
-    // <section className="container py-4 ">
     <div className="grid gap-4 mb-8 sm:grid-cols-12">
       <div className="col-span-12 pt-1 sm:col-span-3">
-        {/* <div className="text-left sm:text-left mb-14 before:block before:w-32 before:h-1 before:mb-5 before:rounded-md before:mx-auto sm:before:mx-0 before:bg-blue-600"> */}
         <h3 className="text-3xl font-semibold">Work Experience</h3>
-        {/* </div> */}
       </div>
       <div className="relative col-span-12 space-y-6 sm:col-span-9">
         <div className="col-span-12 space-y-12 relative  sm:col-span-8 sm:space-y-8 sm:before:absolute sm:before:top-2 sm:before:bottom-0 sm:before:w-0.5 sm:before:-left-3 before:bg-gray-300">
@@ -16,10 +12,10 @@ const Timeline = () => {
             <h3 className="text-xl font-semibold tracking-wide">
               Ethernex IT Solutions{' '}
             </h3>
-            <h4 className="text-lg font-semibold text-gray-500 ">
+            <h4 className="text-lg font-semibold text-gray-600 dark:text-gray-300 ">
               Web Developer
             </h4>
-            <time className="text-xs tracking-wide text-gray-700 uppercase dark:text-gray-400">
+            <time className="text-sm font-semibold tracking-wide text-gray-800 uppercase dark:text-gray-400">
               Dec 2021
             </time>
             <p className="mt-2">
@@ -33,10 +29,10 @@ const Timeline = () => {
             <h3 className="text-xl font-semibold tracking-wide">
               Codelynks Software Solutions Pvt. Ltd
             </h3>
-            <h4 className="text-lg font-semibold text-gray-500 ">
+            <h4 className="text-lg font-semibold text-gray-600 dark:text-gray-300 ">
               iPhone Developer
             </h4>
-            <time className="text-xs tracking-wide text-gray-600 uppercase dark:text-gray-400">
+            <time className="text-sm font-semibold tracking-wide text-gray-800 uppercase dark:text-gray-400">
               Jan 2012
             </time>
             <p className="mt-2">
@@ -51,10 +47,10 @@ const Timeline = () => {
             <h3 className="text-xl font-semibold tracking-wide">
               Quest Innovative solutions
             </h3>
-            <h4 className="text-lg font-semibold text-gray-500 ">
+            <h4 className="text-lg font-semibold text-gray-600 dark:text-gray-300 ">
               Intern
             </h4>
-            <time className="text-xs tracking-wide text-gray-600 uppercase dark:text-gray-400">
+            <time className="text-sm font-semibold tracking-wide text-gray-800 uppercase dark:text-gray-400">
               Jun 2011
             </time>
             <p className="mt-2"></p>
@@ -62,9 +58,6 @@ const Timeline = () => {
         </div>
       </div>
     </div>
-    // </section>
-    //{' '}
-    // </section>
   )
 }
 

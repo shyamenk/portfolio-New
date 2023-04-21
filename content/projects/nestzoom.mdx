@@ -1,109 +1,44 @@
 ---
-title: 'Real Estate Application'
+title: 'Property Mate'
 summary:
-  'Fullstack real estate application with user authentication and map
-  search feature.'
-slug: 'nestzoom'
+  'Fullstack application with user authentication and map search feature.'
+slug: 'propertyMate'
 date: '2020-01-01'
-icon: 'nestzoom'
+icon: 'propertyMate.png'
 index: 1
 ---
 
-Real estate application that allows users to create accounts, search, like
-and save listings, look up neighborhood stats and listing history including
-sold data.
+Property Mate is a web application built with React and Firebase that
+allows users to view, add, edit and contact landlords for properties.
 
 You can visit the live application on
 [nest zoom realty's](https://www.nestzoom.com/) website.
 
 ## Tech stack
 
-This is a fullstack JavaScript application that incorporates a
-non-relational database. For safety reasons, we won't dive into the tech
-stack. However, we'll describe some of the application features and
-challenges along the way in more detail.
+- [React](https://reactjs.org/docs/getting-started.html) - a JavaScript
+  library for building user interfaces.
+- [Firebase](https://console.firebase.google.com/) - a mobile and web
+  application development platform that provides backend services and
+  tools.
+- [React Router](https://reactrouter.com/en/main) - a collection of
+  navigational components that compose declaratively with a React
+  application.
+- [React Hooks Form](https://react-hook-form.com/) - a library for building
+  forms in React with performance in mind.
+- [React Toastify](https://www.npmjs.com/package/react-toastify) - a
+  library for adding toast notifications to a React application.
 
 ## Features
 
-- Search autocomplete on address, neighborhood, city, postal code and MLS#
-- Map search page for locating listings and neighborhoods more easily
-- Map drawing tools to limit the search result to any desired area
-- Ability to filter search results based on price, property type, location,
-  number of beds/baths and more.
-- Ability to save a search and get daily email updates
-- Market stats page that aggregates common market indicators
-- Neighborhood stats and listing history for each home
-- Sold data and listing history going back two years
-- School information
-- Mortgage payment calculator
-- Easily book a viewing appointments from the listing page
-- User authentication for protecting sold data and restricted listings
-- User dashboard
-- Admin panel for managing users, showings and activities
-- Hourly listing data update from the real estate board
-- Bot detection and protection
+- The application includes the following features:
+- View Properties: Users can view a list of available properties and filter
+  by location, price, and other criteria.
+- Add Properties: Property owners can add their properties to the database
+  with images, descriptions, and pricing information.
+- Edit Properties: Property owners can edit their properties and update the
+  information in the database.
+- Contact Landlords: Users can contact landlords to inquire about
+  properties using a contact form.
 
 ## Challenges
-
-### RETS
-
-The Real Estate Transaction Standard (RETS) is a technology used to
-exchange standardized real estate data between clients and the Multiple
-Listing Service (MLS).
-
-This is an old standard and it's been entirely replaced in the US by API
-based standards and protocols, but unfortunately still in use in major
-cities in Canada.
-
-Working with the RETS server from these MLS systems requires a RETS client
-application to connect and fetch new listings and corresponding media,
-however since this system is old and hardly used in bigger real estate
-boards, the ecosystem of client libraries are limited and often very
-outdated.
-
-Fortunately we were able to fork an
-[existing library](https://github.com/WinUP/rets-client) and twig it to fit
-our target real estate board server configs.
-
-### Micro services
-
-We have implemented a dedicated server that connects to the real estate
-board's server and pulls listing data on an hourly basis using the above
-mentioned RETS client package.
-
-### Asset management
-
-We are using [Google cloud storage](https://cloud.google.com/) to store
-media files (mainly listing photos) and
-[Cloudinary](https://cloudinary.com/) as our image optimization service to
-serve optimized images on the fly based on the user's browsers.
-
-### Maps and Geolocation
-
-We are utilizing Google Maps API to geocode listings which enables map
-search. We also had to integrate geo coordinates in our queries against the
-database to accurately return results within the specified area.
-
-The map search also features drawing tools. This will allow users to go
-beyond defined neighborhood boundaries and limit their search result to any
-desired area.
-
-## In the pipeline
-
-More features are in the coming for this app, some of which includes:
-
-- Automated home valuation based on recent sales
-- Adding sold data going back 15 years
-- More search filters for more granular results
-- Investment analysis metrics for each listing
-- Ability to like listings and create favorite lists
-- Live chat widget
-- SEO optimization
-
-We are currently rewriting the client side application in React to add a
-more native app feel to the site. More specifically we'll be using NextJS
-framework to serve static HTML when possible to improve user experience by
-decreasing initial load times while also allowing search engines to
-correctly index the page's content. NextJS also comes with built-in image
-optimization that will hopefully replace the need for using a paid service
-like Cloudinary.

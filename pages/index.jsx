@@ -1,7 +1,6 @@
-// import RecentCourses from '@/components/courses/RecentCourses'
 import Intro from '@/components/home/Intro'
 import RecentNotes from '@/components/notes/RecentNotes'
-import RecentProjects from '@/components/projects/RecentProjects'
+import ProjectList from '@/components/projects/ProjectList'
 import Skills from '@/components/Skills/Skills'
 import Timeline from '@/components/timeline/Timeline'
 import { getAllNotesMeta } from '@/lib/notes'
@@ -13,8 +12,9 @@ const Home = ({ notes, projects }) => {
       <Intro />
       <Timeline />
       <Skills />
-      <RecentProjects projects={projects} />
-      <RecentNotes notes={notes} />
+      <ProjectList projects={projects} />
+      {/* <RecentProjects projects={projects} /> */}
+      {/* <RecentNotes notes={notes} /> */}
     </>
   )
 }
