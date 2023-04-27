@@ -5,14 +5,7 @@ import { useEffect, useState } from 'react'
 
 const Intro = () => {
   return (
-    <section className="flex flex-col-reverse items-start gap-8 mb-16 md:flex-row">
-      {/* <Image
-        className="flex-1 rounded-full"
-        src={profilePic}
-        alt="Picture of the author"
-        width={115}
-        height={115}
-      /> */}
+    <section className="flex flex-col-reverse items-start gap-8 p-2 mb-16 md:flex-row">
       <div className="flex-1">
         <h1 className="mb-6 text-3xl font-bold">
           Hey, I&#39;m Shyam{' '}

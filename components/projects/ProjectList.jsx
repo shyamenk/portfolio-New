@@ -1,56 +1,53 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import freshHome from '@/public/images/projects/freshHome.png'
+import { FaChrome, FaGithub } from 'react-icons/fa'
+import { DiChrome } from 'react-icons/di'
+
 const ProjectList = ({ projects }) => {
   return (
-    <div className="mt-2">
-      <h2 className="mb-8 text-3xl font-semibold">Projects</h2>
-      <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-2">
-        {projects.map(project => (
-          <div
-            key={project.slug}
-            className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-react dark:border-gray-700"
-          >
-            <Link href={`/projects/${project.slug}`} passHref>
-              <a>
-                <Image
-                  className="rounded-t-lg"
-                  src={`/images/projects/${project.icon}`}
-                  height={200}
-                  width={400}
-                  alt=""
-                />
-
-                <div className="p-5">
-                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    {project.title}
-                  </h5>
-                  <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                    {project.summary}
-                  </p>
-                  <h1 className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-react-link hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Explore
-                    <svg
-                      aria-hidden="true"
-                      className="w-4 h-4 ml-2 -mr-1"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
-                  </h1>
-                </div>
-              </a>
-            </Link>
-          </div>
-        ))}
+    <section className="p-2 py-4">
+      <div className="max-w-screen-xl mx-auto">
+        <div className="max-w-xl">
+          <h3 className="mb-2 text-3xl font-semibold text-gray-800 dark:text-white sm:text-4xl">
+            Projects
+          </h3>
+        </div>
+        <div className="mt-6">
+          <ul className="grid gap-12 sm:grid-cols-2 md:grid-cols-2">
+            {projects.map((project, idx) => (
+              <Link key={idx} href={`/projects/${project.slug}`} passHref>
+                <li className="p-4 transition cursor-pointer dark:shadow-xl dark:border-gray-800 rounded-xl dark:hover:border-blue-500/10 dark:hover:shadow-blue-500/10 hover:shadow-lg">
+                  <div className="md:h-58 relative w-full h-60 sm:h-52">
+                    <Image
+                      className="rounded-t-md"
+                      src={`/images/projects/${project.icon}`}
+                      layout="fill"
+                      alt="project-image"
+                    />
+                  </div>
+                  <div className="mt-4">
+                    <h4 className="text-xl font-semibold text-gray-700 dark:text-white">
+                      {project.title}
+                    </h4>
+                    <p className="mt-2 font-semibold text-react-link">
+                      {project.tag}
+                    </p>
+                    <p className="mt-2 text-gray-600 dark:text-gray-200">
+                      {project.summary}
+                    </p>
+                    <div className="flex gap-4 mt-3 dark:text-gray-200">
+                      <FaGithub className="w-5 h-5 hover:text-react-link" />
+                      <FaChrome className="w-5 h-5 hover:text-react-link" />
+                    </div>
+                  </div>
+                </li>
+              </Link>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
+    </section>
   )
 }
 

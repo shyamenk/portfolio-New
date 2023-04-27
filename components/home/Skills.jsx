@@ -13,7 +13,7 @@ import {
 
 const Skills = () => {
   return (
-    <section className=" dark:bg-react dark:text-gray-100">
+    <section className="p-2 dark:bg-react dark:text-gray-100">
       <div className="container pb-10 mx-auto space-y-8 ">
         <h3 className="mb-6 text-3xl font-semibold">Skills</h3>
         <div className="flex flex-wrap justify-start md:justify-between">

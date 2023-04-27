@@ -1,23 +1,18 @@
 import SiteLayout from '@/components/layout/site/SiteLayout'
 // import { Analytics } from '@vercel/analytics/react'
 import { ThemeProvider } from 'next-themes'
+import 'react-toastify/dist/ReactToastify.css'
 
 import '@/styles/globals.css'
+import { ToastContainer } from 'react-toastify'
 
 function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider attribute="class">
-      {Component.courseLayout ? (
-        <>
-          <Component {...pageProps} />
-          {/* <Analytics /> */}
-        </>
-      ) : (
-        <SiteLayout>
-          <Component {...pageProps} />
-          {/* <Analytics /> */}
-        </SiteLayout>
-      )}
+      <SiteLayout>
+        <Component {...pageProps} />
+        <ToastContainer />
+      </SiteLayout>
     </ThemeProvider>
   )
 }

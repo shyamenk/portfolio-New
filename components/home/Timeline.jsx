@@ -2,7 +2,7 @@ import React from 'react'
 
 const Timeline = () => {
   return (
-    <div className="grid gap-4 mb-8 sm:grid-cols-12">
+    <div className="grid gap-4 p-2 mb-8 sm:grid-cols-12">
       <div className="col-span-12 pt-1 sm:col-span-3">
         <h3 className="text-3xl font-semibold">Work Experience</h3>
       </div>
