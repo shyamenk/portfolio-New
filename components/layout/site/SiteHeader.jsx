@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import NavLink from '@/components/utils/NavLink'
-import ThemeButton from '@/components/utils/ThemeButton'
+import NavLink from '../../utils/NavLink'
+import ThemeButton from '../../utils/ThemeButton'
 
 const SiteHeader = () => {
   const [mounted, setMounted] = useState(false)

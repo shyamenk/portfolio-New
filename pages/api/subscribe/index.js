@@ -2,7 +2,6 @@ import connectToDatabase from 'Database/db'
 import { NextApiRequest, NextApiResponse } from 'next'
 import nodemailer from 'nodemailer'
 
-connectToDatabase
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { email } = req.body

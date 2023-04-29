@@ -8,18 +8,18 @@ import CustomLink from '../utils/CustomLink'
 const SocialLinks = () => {
   return (
     <>
-      <CustomLink href="https://github.com/shyamenk/">
+      <a href="https://github.com/shyamenk/">
         <SiGithub className="w-6 h-6 cursor-pointer" />
-      </CustomLink>
-      <CustomLink href="https://www.linkedin.com/in/shyamenk/">
+      </a>
+      <a href="https://www.linkedin.com/in/shyamenk/">
         <SiLinkedin className="w-6 h-6 cursor-pointer" />
-      </CustomLink>
-      <CustomLink href="https://twitter.com/shyamenk">
+      </a>
+      <a href="https://twitter.com/shyamenk">
         <SiTwitter className="w-6 h-6 cursor-pointer" />
-      </CustomLink>
-      <CustomLink href="https://leetcode.com/shyamenk/">
+      </a>
+      <a href="https://leetcode.com/shyamenk/">
         <SiLeetcode className="w-6 h-6 cursor-pointer" />
-      </CustomLink>
+      </a>
     </>
   )
 }

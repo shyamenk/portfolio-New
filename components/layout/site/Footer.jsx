@@ -1,4 +1,4 @@
-import CustomLink from '@/components/utils/CustomLink'
+import CustomLink from '../../utils/CustomLink'
 import React from 'react'
 import {
   SiGithub,
@@ -22,24 +22,24 @@ const Footer = () => {
             </a>
           </div>
           <div className="flex justify-center pt-4 space-x-4 lg:pt-0 lg:col-end-13">
-            <CustomLink
+            <a
               href="https://github.com/shyamenk"
               className="flex items-center justify-center w-10 h-10 rounded-full"
             >
               <SiGithub className="w-6 h-6" />
-            </CustomLink>
-            <CustomLink
+            </a>
+            <a
               href="https://linkedin.com/shyamenk"
               className="flex items-center justify-center w-10 h-10 rounded-full"
             >
               <SiLinkedin className="w-6 h-6" />
-            </CustomLink>
-            <CustomLink
+            </a>
+            <a
               href="https://twitter.com/shyamenk"
               className="flex items-center justify-center w-10 h-10 rounded-full"
             >
               <SiTwitter className="w-6 h-6" />
-            </CustomLink>
+            </a>
           </div>
         </div>
       </div>
