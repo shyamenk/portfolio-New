@@ -25,7 +25,6 @@ export default async function handler(req, res) {
       console.error(error)
       return res.status(500).json({ message: 'Internal server error' })
     }
-
     // Send confirmation email
     const transporter = nodemailer.createTransport({
       port: 465,
