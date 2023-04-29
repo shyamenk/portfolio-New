@@ -6,10 +6,10 @@ export default async function handler(req, res) {
       const { name, email, subject, message } = req.body
       const transporter = nodemailer.createTransport({
         port: 465,
-        host: 'mail.ethernexit.com',
+        host: process.env.EMAIL_HOST,
         auth: {
-          user: 'shyam.k@ethernexit.com',
-          pass: 'Shyamenk@123'
+          user: process.env.EMAIL_USERNAME,
+          pass: process.env.EMAIL_PASSWORD
         },
         secure: true
       })
