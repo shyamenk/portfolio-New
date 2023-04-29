@@ -5,15 +5,15 @@ import { useEffect, useState } from 'react'
 
 const Intro = () => {
   return (
-    <section className="flex flex-col-reverse items-start gap-8 p-2 mb-16 md:flex-row">
-      <div className="flex-1">
+    <section className="flex flex-col-reverse items-start gap-8 p-2 mb-8 md:flex-row">
+      <div className="flex-1 ">
         <h1 className="mb-6 text-3xl font-bold">
           Hey, I&#39;m Shyam{' '}
           <span className="font-mono text-xl font-bold text-blue-500 text-opacity-90">
             Web Developer
           </span>
         </h1>
-        <p className="antialiased text-gray-700 dark:text-gray-300 -tracking-normal">
+        <p className="antialiased text-gray-700 dark:text-gray-400 -tracking-normal">
           I&#39;m a Fullstack Developer specializing in modern technologies
           such as React, Next.js, TypeScript, and MongoDB. With a passion
           for building scalable and performant applications, I have

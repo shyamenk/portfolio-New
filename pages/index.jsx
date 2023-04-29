@@ -1,32 +1,30 @@
 import Intro from '@/components/home/Intro'
-// import RecentNotes from '@/components/notes/RecentNotes'
 import ProjectList from '@/components/projects/ProjectList'
 import Skills from '@/components/home/Skills'
-import Timeline from '@/components/home/Timeline'
-import { getAllNotesMeta } from '@/lib/notes'
+import { getAllPostsMeta } from '@/lib/blogs'
 import { getAllProjectsMeta } from '@/lib/projects'
 import Subscribe from '../components/home/Subscribe'
+import Experience from '@/components/home/Experience'
 
-const Home = ({ notes, projects }) => {
+const Home = ({ posts, projects }) => {
   return (
     <>
       <Intro />
-      <Timeline />
+      <Experience />
       <Skills />
       <ProjectList projects={projects} />
       <Subscribe />
-      {/* <RecentNotes notes={notes} /> */}
     </>
   )
 }
 
 export async function getStaticProps() {
-  const notes = getAllNotesMeta()
+  const posts = getAllPostsMeta()
   const projects = getAllProjectsMeta()
 
   return {
     props: {
-      notes: notes.slice(0, 5),
+      posts: posts.slice(0, 5),
       projects: projects.slice(0, 4)
     },
     revalidate: 60 * 60 * 24

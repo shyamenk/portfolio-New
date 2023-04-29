@@ -18,7 +18,7 @@ const ProjectsIndex = ({ projects }) => {
                   </div>
                   <DateFormatter
                     dateString={meta.date}
-                    className="w-1/4 mt-1 text-sm font-light text-right text-gray-500"
+                    className="w-1/4 mt-1 text-sm font-light text-right text-gray-700"
                   />
                 </div>
               </a>

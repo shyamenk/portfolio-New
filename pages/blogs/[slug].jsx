@@ -1,13 +1,13 @@
-import NoteLayout from '@/components/layout/notes/NoteLayout'
-import { getAllSlugs, getNoteBySlug } from '@/lib/notes'
+import BlogLayout from '@/components/layout/blogs/BlogLayout'
+import { getAllSlugs, getPostBySlug } from '@/lib/blogs'
 
-const Note = ({ meta, source }) => {
-  return <NoteLayout meta={meta} source={source} />
+const Post = ({ meta, source }) => {
+  return <BlogLayout meta={meta} source={source} />
 }
 
 export async function getStaticProps({ params }) {
   const { slug } = params
-  const { meta, source } = await getNoteBySlug(slug)
+  const { meta, source } = await getPostBySlug(slug)
 
   return {
     props: {
@@ -27,4 +27,4 @@ export async function getStaticPaths() {
   }
 }
 
-export default Note
+export default Post

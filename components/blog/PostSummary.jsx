@@ -1,10 +1,10 @@
 import Link from 'next/link'
 
-const NoteSummary = ({ meta }) => {
+const PostSummary = ({ meta }) => {
   const { title, excerpt, slug } = meta
   return (
     <li>
-      <Link href={`/notes/${slug}`}>
+      <Link href={`/blogs/${slug}`}>
         <a>
           <div className="mb-6">
             <div className="flex items-center justify-between gap-4">
@@ -18,4 +18,4 @@ const NoteSummary = ({ meta }) => {
   )
 }
 
-export default NoteSummary
+export default PostSummary

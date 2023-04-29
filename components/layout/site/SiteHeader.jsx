@@ -7,7 +7,7 @@ const SiteHeader = () => {
   useEffect(() => setMounted(true), [])
 
   return (
-    <header className="sticky top-0 z-10 py-6 mb-16 bg-white bg-opacity-95 dark:bg-react dark:bg-opacity-95">
+    <header className="sticky top-0 z-50 py-2 mb-8 bg-white bg-opacity-95 dark:bg-react dark:bg-opacity-95">
       <nav className="flex flex-row-reverse items-center justify-center w-full max-w-4xl px-6 mx-auto">
         <div className="m-4">{mounted && <ThemeButton />}</div>
 
@@ -27,10 +27,10 @@ const SiteHeader = () => {
           </li>
           <li>
             <NavLink
-              href="/notes"
+              href="/blogs"
               className="transition hover:text-react-link"
             >
-              Notes
+              Blog
             </NavLink>
           </li>
 
@@ -40,6 +40,14 @@ const SiteHeader = () => {
               className="transition hover:text-react-link"
             >
               Contact
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              href="/about"
+              className="transition hover:text-react-link"
+            >
+              About
             </NavLink>
           </li>
         </ul>

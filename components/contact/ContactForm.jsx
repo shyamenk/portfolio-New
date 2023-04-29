@@ -39,10 +39,9 @@ const ContactForm = () => {
   })
 
   return (
-    <section className="relative dark:bg-react py-28">
+    <section className="relative py-10 dark:bg-react ">
       <div className="relative z-10 max-w-screen-xl mx-auto text-gray-900 sm:px-4 md:px-8">
         <div className="max-w-lg px-4 space-y-3 sm:mx-auto sm:text-center sm:px-0">
-          <h3 className="font-semibold text-react-link">Contact</h3>
           <p className="text-3xl font-semibold dark:text-white sm:text-4xl">
             Get in touch
           </p>

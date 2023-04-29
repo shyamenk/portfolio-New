@@ -1,5 +1,4 @@
 import connectToDatabase from 'Database/db'
-import { NextApiRequest, NextApiResponse } from 'next'
 import nodemailer from 'nodemailer'
 
 export default async function handler(req, res) {
@@ -13,10 +12,9 @@ export default async function handler(req, res) {
     // Save email to database
     try {
       const db = await connectToDatabase()
-
       const subscribers = db.collection('subscribers')
-      const isinDatabase = await subscribers.findOne({ email })
-      if (isinDatabase) {
+      const isScubscriberFound = await subscribers.findOne({ email })
+      if (isScubscriberFound) {
         return res
           .status(201)
           .json({ message: 'You are already subscribed' })

@@ -1,23 +1,23 @@
 import { useState } from 'react'
-import NoteSummary from './NoteSummary'
+import PostSummary from './PostSummary'
 
-const NotesIndex = ({ notes }) => {
+const PostsIndex = ({ posts }) => {
   const [filter, setFilter] = useState('')
 
   const filtered = filter
-    ? notes.filter(meta =>
+    ? posts.filter(meta =>
         meta.title.toLowerCase().includes(filter.trim().toLowerCase())
       )
-    : notes
+    : posts
 
   return (
-    <section>
-      <h1 className="mb-12 text-3xl font-bold">All Notes</h1>
+    <section className="h-screen">
+      <h1 className="mb-12 text-3xl font-bold ">All Blog Post</h1>
       <div className="mb-8 flex items-center justify-between rounded-md bg-[#2b303b] py-1.5 pl-4 pr-2 focus-within:ring focus-within:ring-react-link dark:bg-[#282c34] dark:focus-within:ring-2">
         <input
           type="text"
-          className="grow bg-transparent text-white outline-none  placeholder:text-gray-500"
-          placeholder="Search Notes..."
+          className="text-white bg-transparent outline-none grow placeholder:text-gray-500"
+          placeholder="Search Blogs..."
           value={filter}
           onChange={e => setFilter(e.target.value)}
         />
@@ -34,11 +34,11 @@ const NotesIndex = ({ notes }) => {
       </div>
       <ul>
         {filtered.map(meta => (
-          <NoteSummary key={meta.slug} meta={meta} />
+          <PostSummary key={meta.slug} meta={meta} />
         ))}
       </ul>
     </section>
   )
 }
 
-export default NotesIndex
+export default PostsIndex

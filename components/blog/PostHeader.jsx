@@ -3,14 +3,14 @@ import Avatar from '../utils/Avatar'
 import DateFormatter from '../utils/DateFormatter'
 import { useRouter } from 'next/router'
 
-const NoteHeader = ({ meta }) => {
+const PostHeader = ({ meta }) => {
   const { title, slug, author, date, readTime } = meta
 
   const router = useRouter()
   const asPath = router?.asPath?.split('?')[0]
 
   return (
-    <header className="mb-12">
+    <header className="mb-12 ">
       <h1 className="mb-4 text-4xl font-bold leading-tight tracking-tighter md:leading-none lg:text-5xl">
         {title}
       </h1>
@@ -43,4 +43,4 @@ const NoteHeader = ({ meta }) => {
   )
 }
 
-export default NoteHeader
+export default PostHeader

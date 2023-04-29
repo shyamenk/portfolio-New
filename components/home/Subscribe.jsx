@@ -29,9 +29,9 @@ const Subscribe = () => {
     }
   }
   return (
-    <section className="relative mt-10 py-28">
+    <section className="relative py-20 mt-10 ">
       <div className="relative z-10 items-center justify-between gap-12 px-4 mx-auto md:px-8 md:flex">
-        <div className="flex-1 max-w-lg rounded-lg">
+        <div className="flex-1 max-w-lg rounded-lg ">
           <h3 className="text-3xl font-bold">
             Get the newsletter straight to your inbox.
           </h3>
@@ -71,13 +71,7 @@ const Subscribe = () => {
           </form>
         </div>
       </div>
-      <div
-        className="absolute inset-0 w-full h-full rounded-lg"
-        style={{
-          background:
-            'linear-gradient(137.92deg, rgba(192, 132, 252, 0) 20.43%, rgba(232, 121, 249, 0.26) 49.66%, rgba(204, 171, 238, 0) 92.38%)'
-        }}
-      ></div>
+      <div className="absolute inset-0 w-full h-full rounded-lg opacity-50 bg-gray-800/10 dark:bg-blue-600/10"></div>
     </section>
   )
 }
