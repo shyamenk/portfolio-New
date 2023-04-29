@@ -33,8 +33,10 @@ export default async function handler(req, res) {
     } catch (error) {
       return res.status(500).json({ message: 'Something went Wrong!' })
     }
+
+    console.log('Hi')
   } else {
-    res.setHeader('Allow', ['POST'])
+    res.setHeader('Allow', ['POST', 'GET'])
     res.status(405).json({ message: `Method ${req.method} not allowed` })
   }
 }
