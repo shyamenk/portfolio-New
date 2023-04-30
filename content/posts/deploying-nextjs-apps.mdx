@@ -1,13 +1,14 @@
 ---
 title: Deploying NextJS Apps
 excerpt: How to deploy your NextJS application to production
-coverImage: /images/notes/deploying-nextjs-apps/cover.png
+coverImage: /images/blogs/nextjs.avif
 ogImage: /images/notes/deploying-nextjs-apps/cover.png
 
 tags:
   - NextJS
   - Production
   - Deployment
+  - Vercel
 
 author:
   name: Shyam Kumar
@@ -35,24 +36,6 @@ require a server:
 - Internationalized Routing
 - API Routes
 - Rewrites
-- Redirects
-- Headers
-- Middleware
-- Incremental Static Regeneration
-- `fallback: true`
-- `getServerSideProps`
-
-to do this you can update your build script to use `next export`
-
-```json title="package.json"
-"scripts": {
-  "build": "next build && next export"
-}
-```
-
-Running `npm run build` will generate an `out` directory which is the
-static version of your app built by `next export` that you can deploy to
-any static host.
 
 ### Supported Features
 

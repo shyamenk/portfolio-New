@@ -6,9 +6,9 @@ html {
   min-width: 360px;
   scroll-behavior: smooth;
 }
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   display: none;
-}
+} */
 /* Target the top level __next div */
 /* #__next {} */
 
