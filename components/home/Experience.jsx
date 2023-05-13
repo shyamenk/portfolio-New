@@ -12,7 +12,7 @@ const Experience = () => {
       title: 'Codelynks Software Solutions Pvt. Ltd',
       position: 'iPhone Developer',
       desc: ' Design and build advanced iOS applications using Xcode and Objective C.Ensure the performance, quality, and responsiveness of applications. Collaborate with a team to define, design, and ship new features.',
-      date: 'Jan 11, 2011 - Jan 5, 2014',
+      date: 'Jan 11, 2012 - Jan 5, 2014',
       type: 'Fulltime',
       location: 'Cochin, India'
     },
@@ -26,15 +26,15 @@ const Experience = () => {
     }
   ]
   return (
-    <section className="max-w-screen-lg mx-auto mb-8 bg-white dark:bg-react">
+    <section className="max-w-6xl mx-auto mb-8 bg-white dark:bg-react">
       <div>
-        <h1 className="mb-4 text-3xl font-semibold text-gray-800 dark:text-white">
+        <h1 className="mb-4 text-2xl font-semibold text-gray-800 dark:text-white">
           Work Experience
         </h1>
       </div>
-      <ul className="mt-2 space-y-6 px-4 ">
+      <ul className="mt-2 space-y-6">
         {jobs.map((item, idx) => (
-          <li key={idx} className="space-x-2">
+          <li key={idx} className="">
             <div>
               <div className="justify-between sm:flex">
                 <div className="flex-1">
@@ -50,7 +50,7 @@ const Experience = () => {
                     </p>
                   </div>
                 </div>
-                <div className="mt-5 space-y-4 text-sm sm:mt-0 sm:space-y-2">
+                <div className="mt-5  space-y-4 text-sm sm:mt-0 sm:space-y-2">
                   <span className="flex items-center text-gray-600 dark:text-gray-300">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +69,7 @@ const Experience = () => {
                 </div>
               </div>
               <div className="items-center mt-4 space-y-4 text-sm sm:flex sm:space-x-4 sm:space-y-0">
-                <span className="flex items-center text-gray-500 dark:text-gray-300">
+                <span className="mx-2 flex items-center text-gray-500 dark:text-gray-300">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="w-5 h-5 mr-2"

@@ -15,7 +15,7 @@ const Skills = () => {
   return (
     <section className=" dark:bg-react dark:text-gray-100">
       <div className="container pb-10 mx-auto space-y-8 ">
-        <h3 className="mb-6 text-3xl font-semibold">Skills</h3>
+        <h3 className="mb-6 text-2xl font-semibold">Skills</h3>
         <div className="flex flex-wrap justify-start px-4 md:justify-between">
           <div>
             <SiHtml5 className=" hover:scale-150 fill-[#e34c26] w-12  h-12 cursor-pointer   transition-all ease-in-out  mx-10 my-6 md:mx-12 lg:m-0 dark:text-gray-400" />

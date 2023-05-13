@@ -8,7 +8,7 @@ const ProjectList = ({ projects }) => {
   return (
     <section className="mb-8">
       <div className="mx-auto ">
-        <h3 className="mb-8 text-3xl font-semibold">Projects</h3>
+        <h3 className="mb-8 text-2xl font-semibold">Projects</h3>
         <ul className="grid gap-12 mb-4 sm:grid-cols-2 px-4 md:grid-cols-2">
           {projects.map((project, idx) => (
             <li
@@ -30,7 +30,7 @@ const ProjectList = ({ projects }) => {
                   {project.title}
                 </h4>
 
-                <p className=" mb-4 text-gray-600 text-base dark:text-gray-200">
+                <p className=" mb-4 text-gray-600 dark:text-gray-400">
                   {project.summary}
                 </p>
                 <div className="flex gap-2 mb-2">

@@ -10,10 +10,10 @@ const PostHeader = ({ meta }) => {
 
   return (
     <header className="mb-12 ">
-      <h1 className="mb-4 text-4xl font-bold leading-tight tracking-tighter md:leading-none lg:text-5xl">
+      <h1 className="mb-6 text-4xl font-bold leading-tight tracking-wider md:leading-none lg:text-5xl">
         {title}
       </h1>
-      <div className="flex items-center gap-2 text-sm font-light text-zinc-400">
+      <div className="text-gray-500 flex items-center gap-2 text-sm font-light dark:text-gray-300">
         <Avatar name={author.name} src={author.picture} />
         <div className="flex flex-col grow sm:flex-row sm:items-center sm:justify-between">
           <div>
