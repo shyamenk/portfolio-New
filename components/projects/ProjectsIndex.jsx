@@ -13,12 +13,16 @@ const ProjectsIndex = ({ projects }) => {
               <a>
                 <div className="flex justify-between gap-4 mb-6">
                   <div className="w-3/4">
-                    <h4 className="font-semibold">{meta.title}</h4>
-                    <p className="text-gray-500">{meta.summary}</p>
+                    <h4 className="font-semibold mb-1 text-xl">
+                      {meta.title}
+                    </h4>
+                    <p className="dark:text-gray-400 text-gray-600">
+                      {meta.summary}
+                    </p>
                   </div>
                   <DateFormatter
                     dateString={meta.date}
-                    className="w-1/4 mt-1 text-sm font-light text-right text-gray-700"
+                    className="w-1/4 mt-1  font-semibold text-right text-base text-gray-800 dark:text-gray-300"
                   />
                 </div>
               </a>

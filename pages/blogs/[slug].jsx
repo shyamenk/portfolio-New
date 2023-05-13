@@ -1,8 +1,19 @@
 import BlogLayout from '@/components/layout/blogs/BlogLayout'
 import { getAllSlugs, getPostBySlug } from '@/lib/blogs'
+import Head from 'next/head'
 
 const Post = ({ meta, source }) => {
-  return <BlogLayout meta={meta} source={source} />
+  return (
+    <>
+      <Head>
+        <title>
+          Shyamenk&apos;s {meta.title} | Fullstack Web developer
+        </title>
+        <meta name="description" content={meta.excerpt} />
+      </Head>
+      <BlogLayout meta={meta} source={source} />
+    </>
+  )
 }
 
 export async function getStaticProps({ params }) {

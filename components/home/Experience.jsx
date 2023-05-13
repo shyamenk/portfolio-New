@@ -32,7 +32,7 @@ const Experience = () => {
           Work Experience
         </h1>
       </div>
-      <ul className="mt-2 space-y-6 ">
+      <ul className="mt-2 space-y-6 px-4 ">
         {jobs.map((item, idx) => (
           <li key={idx} className="space-x-2">
             <div>
@@ -41,12 +41,14 @@ const Experience = () => {
                   <h3 className="mb-2 text-xl font-medium text-react-link">
                     {item.title}
                   </h3>
-                  <h4 className="text-md dark:text-200 font-semibold text-gray-600 dark:text-gray-300">
-                    {item.position}
-                  </h4>
-                  <p className="pr-2 mt-2 text-gray-600 dark:text-gray-400">
-                    {item.desc}
-                  </p>
+                  <div>
+                    <h4 className="text-md dark:text-200 font-semibold text-gray-600 dark:text-gray-300">
+                      {item.position}
+                    </h4>
+                    <p className="pr-2 mt-2 text-base text-gray-600 dark:text-gray-400">
+                      {item.desc}
+                    </p>
+                  </div>
                 </div>
                 <div className="mt-5 space-y-4 text-sm sm:mt-0 sm:space-y-2">
                   <span className="flex items-center text-gray-600 dark:text-gray-300">
