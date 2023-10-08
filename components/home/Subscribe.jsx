@@ -62,10 +62,10 @@ const Subscribe = () => {
                 value={email}
                 onChange={handleEmailChange}
                 placeholder="Enter your email"
-                className="w-full py-2 pl-12 pr-3 text-gray-500 bg-white border rounded-lg shadow-sm outline-none focus:border-indigo-600"
+                className="w-full py-2 pl-12 pr-3 text-gray-500 bg-white border rounded-lg shadow-sm outline-none focus:border-sky-600"
               />
             </div>
-            <button className="block w-auto px-4 py-3 text-sm font-medium text-center text-white bg-indigo-600 rounded-lg shadow hover:bg-indigo-500 active:bg-indigo-700 active:shadow-none">
+            <button className="block w-auto px-4 py-2 text-sm font-medium text-center text-white bg-sky-600 rounded-lg shadow hover:bg-sky-500 active:bg-sky-700 active:shadow-none">
               Subscribe
             </button>
           </form>

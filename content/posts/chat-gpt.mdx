@@ -1,0 +1,105 @@
+---
+title: Introduction to ChatGPT
+excerpt:
+  ChatGPT is a large language model trained by OpenAI, based on the GPT-3.5
+  architecture. This model is capable of performing a wide range of natural
+  language processing tasks such as text generation, machine translation,
+  and question answering.
+coverImage: /images/blogs/chatgpt.png
+ogImage: /images/notes/deploying-nextjs-apps/cover.png
+
+tags:
+  - NextJS
+  - Production
+  - Deployment
+
+author:
+  name: Shyam Kumar
+  picture: /images/authors/shyam.png
+date: '2023-04-30'
+---
+
+## Architecture of ChatGPT
+
+ChatGPT is based on the GPT-3.5 architecture, which is an extension of the
+GPT-3 architecture. GPT-3.5 is a transformer-based model that uses a
+sequence-to-sequence architecture to process text input.
+
+The architecture of ChatGPT can be broken down into three main components:
+the input layer, the transformer layer, and the output layer.
+
+## Input Layer
+
+- The input layer of ChatGPT is responsible for processing the input text
+  and converting it into a vector representation that can be processed by
+  the transformer layer.
+
+- The input text is first tokenized into a sequence of subword units using
+  a tokenizer. The tokenizer used by ChatGPT is the Byte Pair Encoding
+  (BPE) tokenizer, which is a popular technique for subword tokenization.
+
+- After tokenization, the input text is converted into a sequence of
+  numerical vectors using an embedding layer. The embedding layer maps each
+  token in the input sequence to a high-dimensional vector representation.
+
+## Transformer Layer
+
+- The transformer layer is the core component of ChatGPT. It consists of
+  multiple layers of transformer blocks, each of which contains a
+  self-attention mechanism and a feedforward neural network.
+
+- The self-attention mechanism allows ChatGPT to capture long-range
+  dependencies between words in the input sequence. It works by computing a
+  weighted sum of the input sequence, where the weights are determined by
+  the relevance of each input token to the other tokens in the sequence.
+
+- The feedforward neural network is responsible for learning a non-linear
+  mapping between the input and output representations. It applies a series
+  of linear and non-linear transformations to the output of the
+  self-attention mechanism to produce the final output representation.
+
+## Output Layer
+
+The output layer of ChatGPT is responsible for generating the output text
+from the output representation produced by the transformer layer.
+
+- The output layer consists of a softmax layer that produces a probability
+  distribution over the vocabulary of possible output tokens. The output
+  token with the highest probability is selected as the next token in the
+  generated text.
+
+# Code Examples
+
+In this section, we will provide some code examples to demonstrate the
+capabilities of ChatGPT.
+
+## Text Generation
+
+Text generation is one of the most common applications of language models
+like ChatGPT. To generate text using ChatGPT, we can use the generate
+method of the GPT class provided by the transformers library.
+
+Here's an example of generating text using ChatGPT:
+
+```python
+
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
+
+model = GPT2LMHeadModel.from_pretrained('gpt2-medium')
+tokenizer = GPT2Tokenizer.from_pretrained('gpt2-medium')
+
+text = "Once upon a time"
+input_ids = tokenizer.encode(text, return_tensors='pt')
+
+output = model.generate(input_ids, max_length=50, do_sample=True)
+
+generated_text = tokenizer.decode(output[0], skip_special_tokens=True)
+print(generated_text)
+
+```
+
+In this example, we first load the pre-trained ChatGPT model and tokenizer
+using the GPT2LMHeadModel and GPT2Tokenizer classes provided by the
+transformers library.
+
+We then specify the input text as `"Once upon a time

@@ -1,8 +1,19 @@
 import ProjectLayout from '@/components/layout/projects/ProjectLayout'
 import { getAllProjectSlugs, getProjectBySlug } from '@/lib/projects'
+import Head from 'next/head'
 
 const Project = ({ meta, source }) => {
-  return <ProjectLayout meta={meta} source={source} />
+  return (
+    <>
+      <Head>
+        <title>
+          Shyamenk&apos;s {meta.title} | Fullstack Web developer
+        </title>
+        <meta name="description" content={meta.summary} />
+      </Head>
+      <ProjectLayout meta={meta} source={source} />
+    </>
+  )
 }
 
 export async function getStaticProps({ params }) {

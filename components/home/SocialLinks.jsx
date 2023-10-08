@@ -9,7 +9,7 @@ const SocialLinks = () => {
   return (
     <>
       <a href="https://github.com/shyamenk/">
-        <SiGithub className="w-6 h-6 cursor-pointer" />
+        <SiGithub className="w-6 h-6 cursor-pointer " />
       </a>
       <a href="https://www.linkedin.com/in/shyamenk/">
         <SiLinkedin className="w-6 h-6 cursor-pointer" />

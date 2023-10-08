@@ -1,243 +1,135 @@
+import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
+import { FaTwitter, FaGithub, FaLinkedin, FaMail } from 'react-icons/fa'
+import clsx from 'clsx'
+import {
+  TwitterIcon,
+  InstagramIcon,
+  GitHubIcon,
+  LinkedInIcon,
+  MailIcon
+} from '@/components/ui/SocialIcons'
+
 const index = () => {
   return (
     <>
-      <section className="dark:bg-react dark:text-gray-100">
-        <div className="container max-w-xl p-6 py-12 mx-auto space-y-24 lg:px-8 lg:max-w-7xl">
-          <div>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-5xl dark:text-gray-50">
-              A Little about me!
-            </h2>
-            <p className="max-w-3xl mx-auto mt-4 text-xl dark:text-gray-400 md:mx-0">
-              Hello and welcome to my portfolio site! My name is Shyam, and
-              I am a self-taught web developer with a passion for coding
-              and building innovative applications.
-            </p>
-          </div>
-          <div className="grid lg:gap-8 lg:grid-cols-2 lg:items-center">
-            <div>
-              <h3 className="text-2xl font-bold tracking-tight sm:text-3xl dark:text-gray-50">
-                Ad vix debet docendi
-              </h3>
-              <p className="mt-3 text-lg dark:text-gray-400">
-                Ne dicta praesent ocurreret has, diam theophrastus at pro.
-                Eos etiam regione ut, persius eripuit quo id. Sit te
-                euismod tacimates.
+      <Head>
+        <title>Shyamenk&apos;s About me | Fullstack Web developer</title>
+        <meta name="description" content="About Page" />
+      </Head>
+      <section className="dark:bg-react dark:text-gray-100 md:pt-20">
+        <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
+          <div className="lg:pl-20 md:block"></div>
+          <div className="lg:order-first lg:row-span-2">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-800 dark:text-gray-100 sm:text-5xl">
+              I’m Shyam kumar, a passionate web developer based in India.
+            </h1>
+            <div className="mt-6 space-y-7 text-base text-gray-600 dark:text-gray-400">
+              <p>
+                My journey in the tech industry started in 2011 when I
+                began working as a junior iPhone developer. Although I
+                pursued a different career path for some time, the pandemic
+                brought some unexpected changes. I lost my job, which gave
+                me the opportunity to reflect on my aspirations and
+                passions. I realized that the tech industry offered many
+                remote work opportunities, which sparked my interest in
+                learning how to code.
               </p>
-              <div className="mt-12 space-y-12">
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center w-12 h-12 rounded-md dark:bg-react-link dark:text-gray-900">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-7 h-7"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M5 13l4 4L19 7"
-                        ></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="text-lg font-medium leading-6 dark:text-gray-50">
-                      Per ei quaeque sensibus
-                    </h4>
-                    <p className="mt-2 dark:text-gray-400">
-                      Ex usu illum iudico molestie. Pro ne agam facete
-                      mediocritatem, ridens labore facete mea ei. Pro id
-                      apeirian dignissim.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center w-12 h-12 rounded-md dark:bg-react-link dark:text-gray-900">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-7 h-7"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M5 13l4 4L19 7"
-                        ></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="text-lg font-medium leading-6 dark:text-gray-50">
-                      Cu imperdiet posidonium sed
-                    </h4>
-                    <p className="mt-2 dark:text-gray-400">
-                      Amet utinam aliquando ut mea, malis admodum ocurreret
-                      nec et, elit tibique cu nec. Nec ex maluisset
-                      inciderint, ex quis.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center w-12 h-12 rounded-md dark:bg-react-link dark:text-gray-900">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-7 h-7"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M5 13l4 4L19 7"
-                        ></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="text-lg font-medium leading-6 dark:text-gray-50">
-                      Nulla omittam sadipscing mel ne
-                    </h4>
-                    <p className="mt-2 dark:text-gray-400">
-                      At sed possim oporteat probatus, justo graece ne nec,
-                      minim commodo legimus ut vix. Ut eos iudico quando
-                      soleat, nam modus.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div aria-hidden="true" className="mt-10 lg:mt-0">
-              {/* <Image
-                src="https://source.unsplash.com/random/360x480"
-                alt=""
-                className="mx-auto rounded-lg shadow-lg dark:bg-gray-500"
-              /> */}
+              <p>
+                At first, I was confused about which language to choose,
+                but after doing some research, I decided to learn
+                JavaScript. The reason I chose JavaScript was that I could
+                do both frontend and backend with this language in a short
+                period of time.
+              </p>
+              <p>
+                Initially, I struggled with structuring my learning plan
+                and picked random topics to study. But after a month, I
+                realized I needed to start from the fundamentals and build
+                my knowledge. I enrolled in Frontend Masters JavaScript The
+                Hard Parts course, which gave me a deep understanding of
+                the languages inner workings.
+              </p>
+              <p>
+                Today, i’m armed with my knowledge and experience, I can
+                confidently say that I am a <em>full-stack</em> developer
+                who can create incredible applications with
+                <em> type-safe</em> code.
+              </p>
             </div>
           </div>
-          <div>
-            <div className="grid lg:gap-8 lg:grid-cols-2 lg:items-center">
-              <div className="lg:col-start-2">
-                <h3 className="text-2xl font-bold tracking-tight sm:text-3xl dark:text-gray-50">
-                  Eam nibh gloriatur ex
-                </h3>
-                <p className="mt-3 text-lg dark:text-gray-400">
-                  Per odio fabellas consulatu cu. Utroque detracto mel ea,
-                  quo te latine theophrastus. Ea his tale nibh dissentias,
-                  mei exerci tamquam euripidis cu.
-                </p>
-                <div className="mt-12 space-y-12">
-                  <div className="flex">
-                    <div className="flex-shrink-0">
-                      <div className="flex items-center justify-center w-12 h-12 rounded-md dark:bg-react-link dark:text-gray-900">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          className="w-7 h-7"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M5 13l4 4L19 7"
-                          ></path>
-                        </svg>
-                      </div>
-                    </div>
-                    <div className="ml-4">
-                      <h4 className="text-lg font-medium leading-6 dark:text-gray-50">
-                        Cibo augue offendit has ad
-                      </h4>
-                      <p className="mt-2 dark:text-gray-400">
-                        An per velit appellantur, ut utinam minimum
-                        nominavi sit, odio nostro habemus ne nec. Ne sonet
-                        regione contentiones est.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex">
-                    <div className="flex-shrink-0">
-                      <div className="flex items-center justify-center w-12 h-12 rounded-md dark:bg-react-link dark:text-gray-900">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          className="w-7 h-7"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M5 13l4 4L19 7"
-                          ></path>
-                        </svg>
-                      </div>
-                    </div>
-                    <div className="ml-4">
-                      <h4 className="text-lg font-medium leading-6 dark:text-gray-50">
-                        At eum ferri luptatum lobortis
-                      </h4>
-                      <p className="mt-2 dark:text-gray-400">
-                        Te per quidam maiorum ocurreret, etiam
-                        delicatissimi usu ad. Ne has quod periculis. Te sit
-                        primis iisque efficiantur.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex">
-                    <div className="flex-shrink-0">
-                      <div className="flex items-center justify-center w-12 h-12 rounded-md dark:bg-react-link dark:text-gray-900">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          className="w-7 h-7"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M5 13l4 4L19 7"
-                          ></path>
-                        </svg>
-                      </div>
-                    </div>
-                    <div className="ml-4">
-                      <h4 className="text-lg font-medium leading-6 dark:text-gray-50">
-                        Dicunt verterem evertitur eu sea
-                      </h4>
-                      <p className="mt-2 dark:text-gray-400">
-                        Audire principes rationibus eam an, autem nominavi
-                        luptatum per te. Sumo fabulas vim eu, sonet saperet
-                        eleifend ut vix.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-10 lg:mt-0 lg:col-start-1 lg:row-start-1">
-                {/* <Image
-                  src="https://source.unsplash.com/random/361x481"
-                  alt=""
-                  className="mx-auto rounded-lg shadow-lg dark:bg-gray-500"
-                /> */}
-              </div>
-            </div>
+          <div className="lg:pl-20 ">
+            <ul role="list">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://twitter.com/shyamenk"
+                className='group dark:hover:text-sky-500" mt-4 flex text-sm font-medium text-gray-800 transition hover:text-sky-500 dark:text-gray-200'
+              >
+                <TwitterIcon
+                  className=" h-6
+                  w-6
+                  flex-none
+                  fill-gray-500
+                  transition
+                  group-hover:fill-sky-500"
+                />
+                <span className="ml-4">Follow on Twitter</span>
+              </a>
+
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://github.com/shyamenk/"
+                className='group dark:hover:text-sky-500" mt-4 flex text-sm font-medium text-gray-800 transition hover:text-sky-500 dark:text-gray-200'
+              >
+                <GitHubIcon
+                  className=" h-6
+                  w-6
+                  flex-none
+                  fill-gray-500
+                  transition
+                  group-hover:fill-sky-500"
+                />
+                <span className="ml-4">Follow on GitHub</span>
+              </a>
+
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://www.linkedin.com/in/shyamenk/"
+                className='group dark:hover:text-sky-500" mt-4 flex text-sm font-medium text-gray-800 transition hover:text-teal-500 dark:text-gray-200'
+              >
+                <LinkedInIcon
+                  className=" h-6
+                  w-6
+                  flex-none
+                  fill-gray-500
+                  transition
+                  group-hover:fill-sky-500"
+                />
+                <span className="ml-4">Follow on LinkedIn</span>
+              </a>
+
+              <a
+                href="mailto:shyamenk@gmail"
+                target="_blank"
+                rel="noreferrer"
+                className="group mt-2 border-t dark:hover:text-sky-500 flex text-sm font-medium text-gray-800 transition hover:text-sky-500 dark:text-gray-200 border-gray-100 pt-4 dark:border-gray-700/40"
+              >
+                <MailIcon
+                  className=" h-6
+                  w-6
+                  flex-none
+                  fill-gray-500
+                  transition
+                  group-hover:fill-sky-500"
+                />
+                <span className="ml-4">shyamenk@gmail.com</span>
+              </a>
+            </ul>
           </div>
         </div>
       </section>
