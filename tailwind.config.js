@@ -156,7 +156,7 @@ module.exports = {
               fontSize: theme('fontSize.sm')[0],
               fontWeight: theme('fontWeight.semibold'),
               backgroundColor: 'var(--tw-prose-code-bg)',
-              borderRadius: theme('borderRadius.lg'),
+              borderRadius: theme('borderRadius.md'),
               paddingLeft: theme('spacing.1'),
               paddingRight: theme('spacing.1')
             },
@@ -226,7 +226,7 @@ module.exports = {
               fontSize: theme('fontSize.sm')[0],
               fontWeight: theme('fontWeight.medium'),
               backgroundColor: 'var(--tw-prose-pre-bg)',
-              borderRadius: theme('borderRadius.3xl'),
+              borderRadius: theme('borderRadius.xl'),
               padding: theme('spacing.8'),
               overflowX: 'auto',
               border: '1px solid',

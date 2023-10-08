@@ -10,7 +10,7 @@ const PostSummary = ({ meta }) => {
     <li className="gap grid grid-cols-1 my-10 cursor-pointer">
       <Link href={`/blogs/${slug}`} passHref>
         <div className="text-gray-600 ">
-          <div className="transition duration-300 bg-white border border-transparent dark:bg-transparent hover:border-gray-300 dark:shadow-none dark:hover:border-gray-700 dark:hover:bg-gray-800 shadow-transparent hover:shadow-gray-600/10 sm:gap-8 sm:flex ">
+          <div className=" border-spacing-0 transition duration-300 bg-white border border-transparent dark:bg-transparent hover:border-gray-300 dark:shadow-none dark:hover:border-gray-700 dark:hover:bg-gray-800 shadow-transparent hover:shadow-gray-600/10 sm:gap-8 sm:flex ">
             <div className="flex p-0 transition-all duration-500 md:pb-4">
               <Image
                 src={coverImage}
@@ -29,15 +29,13 @@ const PostSummary = ({ meta }) => {
                 {excerpt}
               </p>
               <div className="flex gap-2 pl-0 mb-2">
-                <h1 className="dark:text-gray-300">Tags</h1>
-
                 {tags.map((tag, idx) => (
-                  <a
-                    className="px-3 py-1 text-sm font-medium text-blue-600 transition duration-300 border border-gray-100 rounded-full hover:bg-blue-500 hover:border-transparent hover:text-white dark:border-gray-700 dark:text-gray-300"
+                  <span
                     key={idx}
+                    className="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-3 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-300"
                   >
                     {tag}
-                  </a>
+                  </span>
                 ))}
               </div>
               <div className="flex justify-between gap-4">
