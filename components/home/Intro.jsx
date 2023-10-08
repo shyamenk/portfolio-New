@@ -5,13 +5,13 @@ const Intro = () => {
     <section className="flex flex-col-reverse items-start gap-8 p-2 mb-8 md:flex-row">
       <div className="flex-1 ">
         <h1 className="mb-6 text-3xl font-bold">
-          Hey, I&#39;m Shyam{' '}
+          Hey, I&apos;m Shyam{' '}
           <span className="font-mono text-xl font-bold text-blue-500 text-opacity-90">
             Web Developer
           </span>
         </h1>
         <p className="antialiased text-gray-700 dark:text-gray-400">
-          I&#39;m a web developer with expertise in modern technologies,
+          I&apos;m a web developer with expertise in modern technologies,
           including React, Next.js, TypeScript, and MongoDB. In addition to
           these technologies, I also have a strong background in Python
           FastAPI, PostgreSQL, and Node.js. My passion lies in crafting
