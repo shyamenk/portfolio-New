@@ -1,14 +1,17 @@
 import {
-  SiHtml5,
   SiCss3,
-  SiJavascript,
-  SiReact,
-  SiNodedotjs,
-  SiNextdotjs,
-  SiTypescript,
-  SiGit,
   SiDocker,
-  SiMongodb
+  SiFastapi,
+  SiGit,
+  SiHtml5,
+  SiJavascript,
+  SiMongodb,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPostgresql,
+  SiPython,
+  SiReact,
+  SiTypescript
 } from 'react-icons/si'
 
 const Skills = () => {
@@ -33,6 +36,12 @@ const Skills = () => {
             <SiNodedotjs className="hover:scale-150 fill-[#6cc24a] w-12  h-12 cursor-pointer  transition-all ease-in-out mx-10 my-6 md:mx-12 lg:m-0 dark:text-gray-400" />
           </div>
           <div>
+            <SiPython className="hover:scale-150 fill-[#4584b6] w-12  h-12 cursor-pointer  transition-all ease-in-out mx-10 my-6 md:mx-12 lg:m-0 dark:text-gray-400" />
+          </div>
+          <div>
+            <SiFastapi className="hover:scale-150 fill-[#0d9c8f] w-12  h-12 cursor-pointer  transition-all ease-in-out mx-10 my-6 md:mx-12 lg:m-0 dark:text-gray-400" />
+          </div>
+          <div>
             <SiNextdotjs className="w-12 h-12 mx-10 my-6 transition-all ease-in-out cursor-pointer fill-current hover:scale-150 md:mx-12 lg:m-0 dark:text-gray-400" />
           </div>
           <div>
@@ -40,6 +49,9 @@ const Skills = () => {
           </div>
           <div>
             <SiMongodb className="hover:scale-150 fill-[#589636] w-12  h-12 cursor-pointer  transition-all ease-in-out mx-10 my-6 md:mx-12 lg:m-0 dark:text-gray-400" />
+          </div>
+          <div>
+            <SiPostgresql className="hover:scale-150 fill-[#0064a5] w-12  h-12 cursor-pointer  transition-all ease-in-out mx-10 my-6 md:mx-12 lg:m-0 dark:text-gray-400" />
           </div>
           <div>
             <SiGit className="hover:scale-150 fill-[#F1502F] w-12  h-12 cursor-pointer  transition-all ease-in-out mx-10 my-6 md:mx-12 lg:m-0 dark:text-gray-400" />
