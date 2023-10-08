@@ -1,12 +1,7 @@
-import Image from 'next/image'
-import profilePic from '@/public/images/authors/shyam.png'
-import SocialLinks from './SocialLinks'
-import { useEffect, useState } from 'react'
 import {
-  TwitterIcon,
-  InstagramIcon,
   GitHubIcon,
-  LinkedInIcon
+  LinkedInIcon,
+  TwitterIcon
 } from '@/components/ui/SocialIcons'
 function SocialLink({ icon: Icon, ...props }) {
   return (
@@ -27,14 +22,16 @@ const Intro = () => {
             </span>
           </h1>
           <p className="mt-6 text-base text-gray-600 dark:text-gray-400">
-            I&#39;m a Fullstack Developer specializing in modern
-            technologies such as React, Next.js, TypeScript, and MongoDB.
-            With a passion for building scalable and performant
-            applications, I have experience creating REST APIs and
-            implementing complex business logic. From front-end design to
-            back-end functionality, I&#39;m skilled in every aspect of the
-            development process and always strive for excellence in every
-            project I undertake.
+            I&#39;m a Web developer with expertise in modern technologies,
+            including React, Next.js, TypeScript, and MongoDB. In addition
+            to these technologies, I also have a strong background in
+            Python FastAPI, PostgreSQL, and Node.js. My passion lies in
+            crafting scalable and high-performance applications, and I
+            bring a wealth of experience in building REST APIs and handling
+            intricate business logic. From front-end design to back-end
+            functionality, I&#39;m well-versed in every facet of the
+            development process and am dedicated to delivering excellence
+            in every project I take on.
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink

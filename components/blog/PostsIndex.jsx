@@ -11,7 +11,7 @@ const PostsIndex = ({ posts }) => {
     : posts
 
   return (
-    <section className="h-screen">
+    <section className="">
       <h1 className="mb-12 text-3xl font-bold ">All Blog Post</h1>
       <div className="mb-8 flex items-center justify-between rounded-md bg-gray-200 text-react py-1.5 pl-4 pr-2 focus-within:ring focus-within:ring-react-link dark:bg-[#282c34] dark:focus-within:ring-2">
         <input

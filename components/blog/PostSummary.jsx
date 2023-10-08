@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import blog from '@/public/images/blogs/blog.avif'
 import DateFormatter from '../utils/DateFormatter'
 
 const PostSummary = ({ meta }) => {
   const { title, excerpt, slug, coverImage, tags, readTime, date } = meta
+
+  console.log(meta)
   return (
     <li className="gap grid grid-cols-1 my-10 cursor-pointer">
       <Link href={`/blogs/${slug}`} passHref>

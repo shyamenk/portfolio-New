@@ -1,15 +1,14 @@
-import Avatar from '../utils/Avatar'
-import DateFormatter from '../utils/DateFormatter'
 import { useRouter } from 'next/router'
 import { BsViewStacked } from 'react-icons/bs'
+import Avatar from '../utils/Avatar'
+import DateFormatter from '../utils/DateFormatter'
 const PostHeader = ({ meta, views }) => {
-  const { title, slug, author, date, readTime } = meta
+  const { title, author, date, readTime } = meta
 
   const router = useRouter()
-  const asPath = router?.asPath?.split('?')[0]
 
   return (
-    <header className="mb-12 ">
+    <header className="mb-12">
       <h1 className="mb-6 text-4xl font-bold leading-tight tracking-wider md:leading-none lg:text-5xl">
         {title}
       </h1>

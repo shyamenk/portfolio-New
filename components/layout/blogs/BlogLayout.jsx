@@ -1,5 +1,5 @@
-import PostMain from '@/components/blog/PostMain'
 import PostHeader from '@/components/blog/PostHeader'
+import PostMain from '@/components/blog/PostMain'
 import Head from 'next/head'
 
 const BlogLayout = ({ meta, source, views }) => {

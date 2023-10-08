@@ -1,5 +1,5 @@
-import { MDXRemote } from 'next-mdx-remote'
 import MDXComponents from '@/components/mdx/MDXComponents'
+import { MDXRemote } from 'next-mdx-remote'
 
 const PostMain = ({ source }) => {
   return (
