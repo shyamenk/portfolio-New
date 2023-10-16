@@ -1,0 +1,132 @@
+---
+title: Securing GitHub Access on Linux with SSH Keys
+excerpt:
+  Secure Shell (SSH) keys provide a secure way to authenticate yourself to
+  various services, including GitHub. In this guide, we'll walk you through
+  the process of setting up SSH for your Linux machine and GitHub account.
+coverImage: /images/blogs/ssh.png
+ogImage: /images/notes/deploying-nextjs-apps/cover.png
+
+tags:
+  - Linux
+  - Github
+  - SSH
+
+author:
+  name: Shyam Kumar
+  picture: /images/authors/shyam.png
+date: '2023-10-16'
+---
+
+# Setting Up SSH for GitHub on Linux
+
+In the world of cybersecurity, safeguarding your access to online services
+is paramount. Secure Shell (SSH) keys provide a robust and secure method
+for authenticating yourself to various services, GitHub included. By
+eliminating the need for constantly entering your username and password,
+SSH keys offer both convenience and enhanced security. In this guide, we
+will take you through the process of setting up SSH for your Linux machine
+and GitHub account.
+
+You'll learn how to generate a secure SSH key pair, add it to your system's
+SSH agent, and associate it with your GitHub account. The use of SSH keys
+not only simplifies the authentication process but also adds an additional
+layer of protection to your GitHub interactions.
+
+Let's dive into the steps and explore how to establish a secure and
+efficient SSH connection between your Linux system and GitHub.
+
+## Prerequisites
+
+Before you begin, ensure that you have the following:
+
+- A GitHub account: You can sign up for one at
+  [GitHub](https://github.com).
+- A Linux machine: This guide is tailored for Linux users.
+
+## Step 1: Generate an SSH Key Pair
+
+1. Open a terminal on your Linux machine.
+
+2. Use the following command to generate a new SSH key pair. You can
+   specify an email address associated with your GitHub account.
+
+   ```bash title="bash"
+   ssh-keygen -t ed25519 -C "your.email@example.com"
+   ```
+
+Options:
+
+- `-t ed25519`: Specifies the type of key to create (Ed25519 is recommended
+  for modern systems).
+- `-C "your.email@example.com"`: An optional comment to help identify the
+  key.
+
+3.  You'll be prompted to choose a location to save the SSH key pair. Press
+    Enter to accept the default location (usually `~/.ssh/id_ed25519`) or
+    provide a different path.
+4.  Set a passphrase for additional security. This passphrase will be
+    required each time you use the key.
+
+## Step 2: Add Your SSH Key to the SSH Agent
+
+1.  Start the SSH agent in the background.
+
+    ```bash title="bash"
+    eval "$(ssh-agent -s)"
+    ```
+
+2.  Add your SSH private key to the SSH agent. Replace
+    `/path/to/your/private/key` with the actual path to your SSH private
+    key file.
+
+    ```bash title="bash"
+    ssh-add /path/to/your/private/key
+    ```
+
+    You'll be prompted to enter the passphrase for the private key.
+
+## Step 3: Add Your SSH Key to GitHub
+
+1.  Copy your public SSH key to your clipboard using the following command.
+    Replace the file path if you used a different location during key
+    generation.
+
+    ```bash title="bash"
+    xclip -sel clip < ~/.ssh/id_ed25519.pub
+    ```
+
+    Note: If you don't have `xclip` installed, you can use
+    `cat ~/.ssh/id_ed25519.pub` and manually copy the key.
+
+2.  Log in to your GitHub account.
+3.  Click on your profile picture in the top-right corner and select
+    "Settings."
+4.  In the left sidebar, click on "SSH and GPG keys."
+5.  Click the "New SSH key" button.
+6.  Give your SSH key a title, and then paste the key from your clipboard
+    into the "Key" field.
+7.  Click "Add SSH key" to save it.
+
+## Step 4: Test Your SSH Connection
+
+To ensure that your SSH key is properly set up for GitHub, you can run the
+following command:
+
+```bash title="bash"
+ssh -T git@github.com
+```
+
+You should see a response like "Hi your.username! You've successfully
+authenticated, but GitHub does not provide shell access." This confirms
+that your SSH key is working correctly.
+
+## Conclusion
+
+Congratulations! You've successfully set up SSH for GitHub on your Linux
+machine. This secure authentication method will allow you to access your
+GitHub repositories without entering your username and password each time.
+
+Remember to keep your SSH private key secure and never share it with
+others. If you encounter any issues, consult GitHub's official
+documentation on SSH key troubleshooting for further assistance.
