@@ -48,7 +48,7 @@ export default async function handler(req, res) {
       if (error) {
         console.error(error)
       } else {
-        console.log('Email sent: ' + info.response)
+        // console.log('Email sent: ' + info.response)
       }
     })
 
