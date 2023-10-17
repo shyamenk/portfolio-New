@@ -9,7 +9,7 @@ const PostHeader = ({ meta, views }) => {
 
   return (
     <header className="mb-12">
-      <h1 className="mb-6 text-4xl font-bold leading-tight tracking-wider md:leading-none lg:text-5xl">
+      <h1 className="mb-3 sm:mb-4 md:mb-6 text-2xl sm:text-3xl md:text-5xl font-serif">
         {title}
       </h1>
       <div className="text-gray-500 flex items-center gap-2 text-sm font-light dark:text-gray-300">

@@ -9,15 +9,15 @@ const PostSummary = ({ meta }) => {
     <li className="gap grid grid-cols-1 my-10 cursor-pointer">
       <Link href={`/blogs/${slug}`} passHref>
         <div className="text-gray-600 ">
-          <div className=" border-spacing-0 transition duration-300 bg-white border border-transparent dark:bg-transparent hover:border-gray-300 dark:shadow-none dark:hover:border-gray-700 dark:hover:bg-gray-800 shadow-transparent hover:shadow-gray-600/10 sm:gap-8 sm:flex ">
-            <div className="flex p-0 transition-all duration-500 md:pb-4">
+          <div className="border-spacing-0 transition duration-300 bg-white border border-transparent dark:bg-transparent hover:border-gray-300 hover:rounded-lg dark:shadow-none dark:hover:border-gray-700 dark:hover:bg-gray-800 shadow-transparent hover:shadow-gray-600/10 sm:gap-8 sm:flex">
+            <div className="flex p-0 transition-all duration-500 ">
               <Image
                 src={coverImage}
                 alt="blog cover"
                 loading="lazy"
                 width="400"
                 height="100"
-                className="object-fill object-center"
+                className="absolute inset-0 w-full h-full object-fill rounded-lg"
               />
             </div>
             <div className="sm:p-2 sm:pl-0 sm:w-4/6">
