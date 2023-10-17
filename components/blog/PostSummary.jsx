@@ -24,7 +24,7 @@ const PostSummary = ({ meta }) => {
               <h3 className="text-2xl font-semibold text-gray-800 dark:text-white">
                 {title}
               </h3>
-              <p className="my-4 text-gray-600 dark:text-gray-300">
+              <p className="line-clamp-3 my-4 text-gray-600 dark:text-gray-300">
                 {excerpt}
               </p>
               <div className="flex gap-2 pl-0 mb-2">
