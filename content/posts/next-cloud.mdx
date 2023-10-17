@@ -1,0 +1,362 @@
+---
+title: Unlocking the Full Potential of Nextcloud
+excerpt:
+  Discover how Nextcloud, the ultimate self-hosted collaboration platform,
+  can revolutionize your online document editing, file synchronization,
+  calendar management, and contact sharing
+coverImage: /images/blogs/nextcloud.png
+
+tags:
+  - Next Cloud
+  - Apache
+  - Ubuntu
+  - MariaDB
+
+author:
+  name: Shyam Kumar
+  picture: /images/authors/shyam.png
+date: '2023-10-18'
+---
+
+# How to Set Up a Nextcloud Server on Ubuntu 22.04
+
+It's time to install Nextcloud! Nextcloud is the best platform for building
+your very own self-hosted collaboration platform, complete with features
+such as online document editing, file synchronization, calendar, contacts,
+and countless plugins. In this guide, you'll be walked through the entire
+process, and by the end, you'll have your very own Nextcloud server that's
+completely set up and ready for action.
+
+### Initial Server Setup
+
+After setting up Ubuntu Server, create a user for yourself if you don't
+already have one:
+
+```shell
+adduser <username>
+```
+
+Adding the user to the sudo group:
+
+```shell
+sudo usermod -aG sudo <username>
+```
+
+After creating your user, be sure to log out from root and log in as that
+user.
+
+### Updating Packages
+
+Before continuing, let's make sure all installed packages are up to date:
+
+```shell
+sudo apt update
+sudo apt dist-upgrade
+```
+
+Clean up orphan packages (if there are any):
+
+```shell
+sudo apt autoremove
+```
+
+### Updating the Hostname
+
+Edit the following files, and be sure they include the proper hostname or
+domain name for your server:
+
+```shell
+sudo nano /etc/hostname
+sudo nano /etc/hosts
+```
+
+Reboot your server so that all the changes we've made so far will take
+effect:
+
+```shell
+sudo reboot
+```
+
+While that's rebooting, update DNS for the domain name if you have one, so
+that can replicate while we finish the other steps.
+
+### Downloading Nextcloud
+
+We'll need to grab the Nextcloud zip file, which contains the necessary
+files we'll be needing.
+[Click here](https://download.nextcloud.com/server/releases/latest.zip) to
+open the download page, then copy the URL for the zip file.
+
+On the server, download the Nextcloud zip file using the URL that you
+copied from the site:
+
+```shell
+wget https://download.nextcloud.com/server/releases/latest.zip
+```
+
+Note: If that URL doesn't work (it can change at any time), grab the URL
+from the Nextcloud site.
+
+### MariaDB Setup
+
+#### Setting up the Database Server
+
+First, let's install the `mariadb-server` package:
+
+```shell
+sudo apt install mariadb-server
+```
+
+Check the status of the MariaDB service:
+
+```shell
+systemctl status mariadb
+```
+
+#### Running the Secure Installation Script
+
+Although there are many tweaks and adjustments you can make to secure
+MariaDB, running the following command and answering the prompts will give
+us a decent starting point:
+
+```shell
+sudo mysql_secure_installation
+```
+
+Follow the prompts to set up some very basic security defaults for the
+database server.
+
+#### Creating the Nextcloud Database
+
+Next, we'll create the database we'll be using for Nextcloud. To do this,
+we'll need to access the MariaDB console:
+
+```shell
+sudo mariadb
+```
+
+Then, we'll create the database and set up permissions with the following
+commands:
+
+```shell
+CREATE DATABASE nextcloud;
+SHOW DATABASES;
+GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'localhost' IDENTIFIED BY 'mypassword';
+FLUSH PRIVILEGES;
+CTRL+D to exit
+```
+
+### Apache Webserver Setup
+
+#### Installing the Required Packages to Support Apache:
+
+```shell
+sudo apt install php php-apcu php-bcmath php-cli php-common php-curl php-gd php-gmp php-imagick php-intl php-mbstring php-mysql php-zip php-xml
+```
+
+Check the status with of Apache:
+
+```shell
+systemctl status apache2
+```
+
+#### Enable the Recommended PHP Extensions:
+
+```shell
+sudo phpenmod bcmath gmp imagick intl
+```
+
+#### Install zip and unzip the Nextcloud zip file:
+
+```shell
+sudo apt install unzip
+unzip latest.zip
+```
+
+Now that we've unzipped the files, let's move the files to where they'll be
+served from and also set the permissions as well:
+
+```shell
+mv nextcloud nextcloud.learnlinux.cloud
+sudo chown -R www-data:www-data nextcloud.learnlinux.cloud
+sudo mv nextcloud.learnlinux.cloud /var/www
+sudo a2dissite 000-default.conf
+```
+
+#### Creating a Host Configuration File for Nextcloud
+
+Next, we'll set up a config file for Apache that tells it how to serve
+Nextcloud:
+
+```shell
+sudo nano /etc/apache2/sites-available/nextcloud.learnlinux.cloud.conf
+```
+
+Add the following contents to the file (be sure to adjust the file names to
+match yours):
+
+```apache
+<VirtualHost *:80>
+    DocumentRoot "/var/www/nextcloud.learnlinux.cloud"
+    ServerName nextcloud.learnlinux.cloud
+
+    <Directory "/var/www/nextcloud.learnlinux.cloud/">
+        Options MultiViews FollowSymlinks
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+   </Directory>
+
+   TransferLog /var/log/apache2/nextcloud.learnlinux.cloud_access.log
+   ErrorLog /var/log/apache2/nextcloud.learnlinux.cloud_error.log
+
+</VirtualHost>
+```
+
+Enable the site:
+
+```shell
+sudo a2ensite apache-config-file-name.conf
+```
+
+#### Configuring PHP
+
+The next step will have us change some PHP options. First, edit the
+following file:
+
+```shell
+sudo nano /etc/php/8.1/apache2/php.ini
+```
+
+Adjust the following parameters:
+
+```shell
+memory_limit = 512M
+upload_max_filesize = 200M
+max_execution_time = 360
+post_max_size = 200M
+date.timezone = America/Detroit
+opcache.enable=1
+opcache.interned_strings_buffer=8
+opcache.max_accelerated_files=10000
+opcache.memory_consumption=128
+opcache.save_comments=1
+opcache.revalidate_freq=1
+```
+
+Enable the following PHP mods for Apache:
+
+```shell
+sudo a2enmod dir env headers mime rewrite ssl
+```
+
+Restart Apache to ensure the new PHP settings take effect:
+
+```shell
+sudo systemctl restart apache2
+```
+
+#### Acquiring a TLS Certificate
+
+Let's set up Let's Encrypt and obtain a certificate for our Nextcloud
+installation. The following steps will guide you through the process.
+
+Note: Instructions are taken from
+[this link](https://certbot.eff.org/instructions?ws=apache&os=ubuntufocal),
+which you may want to visit in case the instructions change in the future.
+
+Ensure snapd is installed:
+
+```shell
+sudo apt install snapd
+```
+
+Install the core snap:
+
+```shell
+sudo snap install core; sudo snap refresh core
+```
+
+Install Certbot:
+
+```shell
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+```
+
+Attempt to obtain a certificate (DNS must have already propagated):
+
+```shell
+sudo certbot --apache
+```
+
+Answer the prompts carefully, and as long as you didn't overlook
+everything, you should have your very own TLS certificate!
+
+### Misc. Tweaks and Adjustments
+
+#### Correct the Permissions of the `config.php` File
+
+We definitely wouldn't want the `config.php` file to fall into the wrong
+hands, as it contains valuable setup information regarding our Nextcloud
+setup. Let's adjust the permissions to better protect it:
+
+```shell
+sudo chmod 660 /var/www/nextcloud.learnlinux.cloud/config/config.php
+sudo chown root:www-data /var/www/nextcloud.learnlinux.cloud/config/config.php
+```
+
+#### Enable Memory Caching
+
+Edit the Nextcloud config file:
+
+```shell
+sudo vim /var/www/nextcloud.learnlinux.cloud/config/config.php
+```
+
+Add the following line to the bottom:
+
+```php
+'memcache.local' => '\\OC\\Memcache\\APCu',
+```
+
+#### Resolving Warnings Pertaining to the Default Phone Region
+
+Edit the Nextcloud config file:
+
+```shell
+sudo vim /var/www/nextcloud.learnlinux.cloud/config/config.php
+```
+
+Add the following line to the bottom of the file:
+
+```php
+'default_phone_region' => 'US',
+```
+
+Note: Be sure to change "US" in the above example to your two-character
+country code if yours is not US.
+
+#### Get Rid of the Image Magick Error
+
+Install the `libmagickcore-6.q16-6-extra` package:
+
+```shell
+sudo apt install libmagickcore-6.q16-6-extra
+```
+
+#### Enabling Strict Transport Security
+
+Edit the SSL config file for our Nextcloud installation:
+
+```shell
+sudo vim /etc/apache2/sites-available/nextcloud.learnlinux.cloud-le-ssl.conf
+```
+
+Add the following line after the ServerName line:
+
+```apache
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=15552000; includeSubDomains"
+</IfModule>
+```

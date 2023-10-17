@@ -1,0 +1,253 @@
+---
+title: React with Nginx on Linux
+excerpt:
+  Are you ready to launch your React application on a Linux server? Whether
+  you're a seasoned developer seeking to enhance your project or just
+  starting out, this guide is here to assist you. Let's dive in!
+coverImage: /images/blogs/nginx.png
+
+tags:
+  - Linux
+  - Nginx
+
+author:
+  name: Shyam Kumar
+  picture: /images/authors/shyam.png
+date: '2023-10-17'
+---
+
+# Step-by-Step Guide: Deploying React application with nginx on Linux
+
+Are you eager to deploy your very own React application on a Linux server?
+Perhaps you're a developer looking to take your project to the next level.
+In this comprehensive guide, I'll walk you through the steps to deploy a
+React app on a Linux server using NGINX, and I'll even share my personal
+journey into Linux and deployment. Let's get started.
+
+## **Step 1** - Launch Your VPS Linux Server
+
+Before embarking on this exciting journey, you'll need a Virtual Private
+Server (VPS) running Linux. You have the flexibility to choose a provider
+that best suits your needs, such as Linode, AWS, or Digital Ocean. After
+successfully creating your server, make sure to jot down the IP address
+provided by the cloud provider.
+
+## **Step 2** - Securely Access Your Server
+
+The initial step is to connect to your Linux server securely. You can use
+SSH (Secure Shell) for this purpose. Here's how you can dive into the
+terminal:
+
+```bash title="bash"
+ssh root@your_server_ip
+```
+
+Upon running this command, you may encounter the authenticity prompt:
+
+```
+The authenticity of host 'your_server_ip' can't be established.
+ECDSA key fingerprint is SHA256...
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+```
+
+Simply answer with "yes," and it will then ask for your server's password.
+After providing the password, you'll be successfully logged into the Linux
+system.
+
+## **Step 3** - Secure Your Server
+
+Before we proceed further, it's essential to ensure that your server is up
+to date and secure. Execute the following commands:
+
+```bash title="bash"
+sudo apt update && sudo apt dist-upgrade
+```
+
+### `Set Your Timezone`
+
+You'll want to set the correct timezone for your server:
+
+```bash title="bash"
+dpkg-reconfigure tzdata
+```
+
+Follow the GUI prompts to select your desired timezone.
+
+### `Create a Non-Root User with Sudo Permissions`
+
+Operating as the root user can be risky. It's safer to create a non-root
+user with sudo privileges. Here's how you can do it:
+
+```bash title="bash"
+adduser your_username
+# You'll be prompted to set a password for the user.
+
+# After user creation, grant them sudo privileges:
+sudo usermod -aG sudo your_username
+# Now, log out from the root session:
+
+logout
+```
+
+Once you've logged out, you can log in again, but this time using the new
+user:
+
+```bash title="bash"
+ssh your_username@your_server_ip
+```
+
+### **Generate an SSH Key Pair for Added Security**
+
+To enhance security further, generate an SSH key pair. Run the following
+command on your local machine:
+
+```bash title="bash"
+ssh-keygen
+```
+
+This command will generate a pair of keys, a private key, and a public key.
+The private key should be kept secure on your local machine, while the
+public key can be added to the server for secure access.
+
+To add the public key to your server, use the following command:
+
+```bash title="bash"
+ssh-copy-id your_username@your_server_ip
+```
+
+You'll be prompted to enter your user's password on the server. After
+adding the public key, you can log in without a password, which
+significantly enhances security.
+
+### `Lock Down Root User Access`
+
+For added security, we can disable root user login:
+
+```bash title="bash"
+your_username@localhost sudo passwd -d root
+your_username@localhost sudo passwd -l root
+```
+
+This detaches and locks root login, making it more secure.
+
+### `Test User Access`
+
+To verify the changes, try to SSH in as the root user:
+
+```bash title="bash"
+ssh root@your_server_ip
+```
+
+You should receive an "access denied" message, confirming that root login
+is locked down.
+
+## **Step 4** - Setting Up NGINX
+
+Now, let's set up NGINX, a robust web server and reverse proxy. NGINX will
+serve your React app to the world. Here are the steps:
+
+```bash title="bash"
+sudo apt install nginx -y
+```
+
+This command installs NGINX on your server. Next, create a directory to
+host your React app:
+
+```bash title="bash"
+sudo mkdir /var/www/your_domain_or_ip
+```
+
+Set the necessary permissions:
+
+```bash title="bash"
+sudo chmod 755 -R /var/www/your_domain_or_ip
+sudo chown -R your_username:www-data /var/www/your_domain_or_ip
+```
+
+With the permissions in place, it's time to configure NGINX for your React
+app. Open the NGINX configuration file:
+
+```bash title="bash"
+sudo nano /etc/nginx/sites-available/your_domain_or_ip
+```
+
+Within the configuration file, add the following:
+
+```nginx title="Nginx"
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name your_domain_or_ip;
+
+    root /var/www/your_domain_or_ip;
+    index index.html;
+}
+```
+
+After adding the configuration, close the editor and test the NGINX
+configuration:
+
+```bash title="bash"
+sudo nginx -t
+```
+
+If everything is configured correctly, you will receive a success message:
+
+```
+nginx: the configuration file /etc/nginx/nginx.conf syntax is OK
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+```
+
+### **Unlink default config**
+
+Before we proceed to the next step, let's unlink the default configuration:
+
+```bash title="bash"
+sudo unlink /etc/nginx/sites-enabled/default
+```
+
+### **Link New Configuration**
+
+Link the new configuration to enable it:
+
+```bash title="bash"
+sudo ln -s /etc/nginx/sites-available/your_domain_or_ip /etc/nginx/sites-enabled/
+```
+
+## **Step 5** - Deploying Your React App
+
+With NGINX in place, it's time to deploy your React app. You'll need a
+`deploy.sh` script in your project's root directory:
+
+```bash title="bash"
+echo "Switching to branch master"
+git checkout master
+
+echo "Building app..."
+npm run build
+
+echo "Deploying files to server..."
+scp -r build/* your_username@your_server_ip:/var/www/your_domain_or_ip/
+
+echo "Done!"
+```
+
+> Don't forget to give the script executable permissions:
+
+```bash title="bash"
+cd your_project_folder
+chmod u+x deploy.sh
+./deploy.sh
+```
+
+When you run the script, it will prompt you for the server password. Once
+entered, it will transfer all the files to your server, and you'll see
+"Done!".
+
+Now, after logging out and back in, visiting `your_domain_or_ip` in your
+web browser will display your React app.
+
+Your React app is now live for the world to see. You've successfully
+deployed a React app on a Linux server with NGINX. I hope this guide helps
+you on your journey into Linux and deployment!
