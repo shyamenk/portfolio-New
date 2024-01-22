@@ -1,13 +1,29 @@
-import { ThemeProvider } from 'next-themes'
-import 'react-toastify/dist/ReactToastify.css'
 import '@/styles/globals.css'
-import { ToastContainer } from 'react-toastify'
-import SiteLayout from '../components/layout/site/SiteLayout'
+import { ThemeProvider } from 'next-themes'
 import Head from 'next/head'
+import Script from 'next/script'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import SiteLayout from '../components/layout/site/SiteLayout'
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
+      <Script
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+      />
+
+      <Script strategy="lazyOnload">
+        {`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+                    page_path: window.location.pathname,
+                    });
+                `}
+      </Script>
       <Head>
         <title>
           Shyamenk&apos;s Portfolio Website | Fullstack Web developer
